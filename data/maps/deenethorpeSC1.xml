@@ -1,0 +1,4 @@
+<map file="deenethorpeSC1.png" projection="Mercator">
+  <point x="0" y="0" geo="WGS84 52.5135336	-0.6125018"/>
+  <point x="1556" y="1034" geo="WGS84 52.4980350	-0.5741848"/>
+</map>

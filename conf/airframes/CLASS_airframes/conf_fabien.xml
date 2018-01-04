@@ -1,0 +1,79 @@
+<conf>
+  <aircraft
+   name="SC1_AC1"
+   ac_id="11"
+   airframe="airframes/CLASS_airframes/Wing3.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc1_AC1.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="blue"
+  />
+  <aircraft
+   name="SC2_AC1"
+   ac_id="21"
+   airframe="airframes/CLASS_airframes/Wing4.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc2_AC1.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="blue"
+  />
+  <aircraft
+   name="SC2_AC2"
+   ac_id="22"
+   airframe="airframes/CLASS_airframes/Wing3.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc2_AC2.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="red"
+  />
+  <aircraft
+   name="SC3_AC1"
+   ac_id="31"
+   airframe="airframes/CLASS_airframes/Wing3.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing_gvf.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc3_AC1.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="blue"
+  />
+  <aircraft
+   name="SC4_AC1"
+   ac_id="41"
+   airframe="airframes/CLASS_airframes/Wing3.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing_gvf.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc4_AC1.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gvf_module.xml~GVF~ modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="blue"
+  />
+  <aircraft
+   name="SC4_AC2"
+   ac_id="42"
+   airframe="airframes/CLASS_airframes/Wing4.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing_gvf.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc4_AC1.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gvf_module.xml~GVF~ modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="#ffff00000000"
+  />
+  <aircraft
+   name="SC5_AC1_proposal"
+   ac_id="1"
+   airframe="airframes/CLASS_airframes/Wing3.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc5_AC1.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="blue"
+  />
+</conf>

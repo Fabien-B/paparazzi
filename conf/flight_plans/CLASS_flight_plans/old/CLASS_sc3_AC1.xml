@@ -1,0 +1,74 @@
+<!DOCTYPE flight_plan SYSTEM "flight_plan.dtd">
+
+<flight_plan alt="152" ground_alt="147" lat0="52.5047299" lon0="-0.5949611" max_dist_from_home="500" name="CLASS SC2 AC2" security_height="2">
+  <header>
+#include "autopilot.h"
+</header>
+  <waypoints>
+    <waypoint name="HOME" x="0.0" y="0.0"/>
+    <waypoint name="CLIMB" x="0.0" y="5.0"/>
+    <waypoint name="STDBY" x="-263.8" y="-127.4"/>
+    <waypoint name="EVAC1" x="63.9" y="-11.1"/>
+    <waypoint name="EVAC2" x="71.8" y="-34.3"/>
+    <waypoint name="EVAC3" x="56.7" y="-54.3"/>
+    <waypoint name="Building" x="41.5" y="1.9"/>
+    <waypoint name="TD" x="5.6" y="-10.9"/>
+  </waypoints>
+  <blocks>
+    <block name="Wait GPS">
+      <call_once fun="NavKillThrottle()"/>
+      <while cond="!GpsFixValid()"/>
+    </block>
+    <block name="Geo init">
+      <while cond="LessThan(NavBlockTime(), 10)"/>
+      <call_once fun="NavSetGroundReferenceHere()"/>
+    </block>
+    <block name="Holding point">
+      <call_once fun="NavKillThrottle()"/>
+      <attitude pitch="0" roll="0" throttle="0" until="FALSE" vmode="throttle"/>
+    </block>
+    <block name="Start Engine">
+      <call_once fun="NavResurrect()"/>
+      <attitude pitch="0" roll="0" throttle="0" until="FALSE" vmode="throttle"/>
+    </block>
+    <block name="Takeoff" strip_button="Takeoff" strip_icon="takeoff.png">
+      <exception cond="stateGetPositionEnu_f()->z > 2.0" deroute="Standby"/>
+      <call_once fun="NavSetWaypointHere(WP_CLIMB)"/>
+      <stay climb="nav_climb_vspeed" vmode="climb" wp="CLIMB"/>
+    </block>
+    <block name="Standby" strip_button="Standby" strip_icon="home.png">
+      <stay wp="STDBY"/>
+    </block>
+    <block name="go_and_stay_Building">
+      <go from="STDBY" hmode="route" wp="Building"/>
+      <stay wp="Building"/>
+    </block>
+    <block name="circle Building" pre_call="nav_set_heading_towards_waypoint(WP_Building)">
+      <circle radius="nav_radius" wp="Building"/>
+    </block>
+    <block name="Leave zone">
+      <go from="Building" hmode="route" wp="EVAC1"/>
+      <go from="EVAC1" hmode="route" wp="EVAC2"/>
+      <go from="EVAC2" hmode="route" wp="EVAC3"/>
+      <deroute block="stay_EVAC3"/>
+    </block>
+    <block name="stay_EVAC3">
+      <stay wp="EVAC3"/>
+    </block>
+    <block name="land here" strip_button="Land Here" strip_icon="land-right.png">
+      <call_once fun="NavSetWaypointHere(WP_TD)"/>
+    </block>
+    <block name="land">
+      <go wp="TD"/>
+    </block>
+    <block name="flare">
+      <exception cond="NavDetectGround()" deroute="Holding point"/>
+      <exception cond="!nav_is_in_flight()" deroute="landed"/>
+      <call_once fun="NavStartDetectGround()"/>
+      <stay climb="nav_descend_vspeed" vmode="climb" wp="TD"/>
+    </block>
+    <block name="landed">
+      <attitude pitch="0" roll="0" throttle="0" until="FALSE" vmode="throttle"/>
+    </block>
+  </blocks>
+</flight_plan>
