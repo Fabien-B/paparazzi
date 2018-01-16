@@ -98,4 +98,15 @@
    settings_modules="modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
    gui_color="blue"
   />
+  <aircraft
+   name="SC6_AC1"
+   ac_id="3"
+   airframe="airframes/CLASS_airframes/Wing4.xml"
+   radio="radios/cockpitSX.xml"
+   telemetry="telemetry/default_fixedwing.xml"
+   flight_plan="flight_plans/CLASS_flight_plans/CLASS_sc6_AC1.xml"
+   settings="settings/fixedwing_basic.xml"
+   settings_modules="modules/gps.xml modules/nav_basic_fw.xml modules/guidance_full_pid_fw.xml modules/stabilization_adaptive_fw.xml modules/ahrs_float_dcm.xml modules/imu_common.xml"
+   gui_color="blue"
+  />
 </conf>
