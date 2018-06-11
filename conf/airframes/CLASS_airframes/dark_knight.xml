@@ -171,7 +171,7 @@
     <define name="ACCEL_Z_SENS" value="2.44183758244" integer="16"/>
 
     <define name="BODY_TO_IMU_PHI" value="0"/>
-    <define name="BODY_TO_IMU_THETA" value="0.143117"/>
+    <define name="BODY_TO_IMU_THETA" value="0.104"/>
     <define name="BODY_TO_IMU_PSI" value="0"/>
   </section>
 
@@ -200,7 +200,7 @@
 	ATP1:  Api mode
 	ATBD6: Baudrate 57600
 	ATWR:  Write in Flash-->
-    <!--define name="XBEE_INIT" value="\"ATID3351\rATCH17\rATP1\rATBD6\r\""/-->
+    <define name="XBEE_INIT" value="\"ATID3332\rATCH17\rATP1\rATBD6\r\""/>
   </section>
 
   <section name="VERTICAL CONTROL" prefix="V_CTL_">
@@ -212,8 +212,8 @@
     <define name="AUTO_CLIMB_LIMIT" value="2*V_CTL_ALTITUDE_MAX_CLIMB"/>
 
     <!-- Cruise throttle + limits -->
-    <define name="AUTO_THROTTLE_NOMINAL_CRUISE_THROTTLE" value="0.40"/>
-    <define name="AUTO_THROTTLE_MIN_CRUISE_THROTTLE" value="0.25"/>
+    <define name="AUTO_THROTTLE_NOMINAL_CRUISE_THROTTLE" value="0.45"/>
+    <define name="AUTO_THROTTLE_MIN_CRUISE_THROTTLE" value="0.35"/>
     <define name="AUTO_THROTTLE_MAX_CRUISE_THROTTLE" value="0.85"/>
 
     <!-- Climb loop (throttle) -->

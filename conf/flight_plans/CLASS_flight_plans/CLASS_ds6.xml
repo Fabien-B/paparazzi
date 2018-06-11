@@ -18,11 +18,8 @@
     <waypoint alt="223.0" lat="52.5039169" lon="-0.5977624" name="D5"/>
     <waypoint alt="223.0" lat="52.504597" lon="-0.595169" name="ACCIDENT"/>
     <waypoint alt="223.0" lat="52.5106722" lon="-0.5867972" name="GK"/>
-    <waypoint alt="223.0" lat="52.5019178" lon="-0.6011632" name="CIR"/>
+    <waypoint lat="52.502287" lon="-0.599814" name="CIR"/>
   </waypoints>
-  <!--variables>
-    <variable var="nb_glides" init="0" type="int"/>
-  </variables-->
   <blocks>
     <block name="Wait GPS">
       <set value="1" var="autopilot.kill_throttle"/>
@@ -42,27 +39,26 @@
       <set value="0" var="autopilot.flight_time"/>
       <go from="HOME" pitch="15" throttle="1.0" vmode="throttle" wp="CLIMB"/>
     </block>
-    
     <block group="home" key="Ctrl+a" name="Standby" strip_button="Standby" strip_icon="home.png">
-      <circle radius="nav_radius" wp="STDBY" until="NavCircleCount() > 2" alt="GetAltRef()+60"/>
+      <circle alt="GetAltRef()+60" radius="nav_radius" until="NavCircleCount() > 2" wp="STDBY"/>
+      <circle alt="GetAltRef()+120" radius="nav_radius" until="NavCircleCount() > 1" wp="STDBY"/>
       <deroute block="circle_D4"/>
     </block>
     <block group="DS6" name="circle_D4" strip_button="circle_D4">
-      <circle radius="50" wp="D4" until="NavCircleCount() > 1" alt="GetAltRef()+120"/>
-      <circle radius="nav_radius" wp="D4" until="NavCircleCount() > 1" alt="GetAltRef()+120"/>
+      <circle alt="GetAltRef()+120" radius="50" until="NavCircleCount() > 1" wp="D4"/>
+      <circle alt="GetAltRef()+120" radius="nav_radius" until="NavCircleCount() > 1" wp="D4"/>
       <deroute block="DS6_route"/>
     </block>
     <block group="DS6" name="DS6_route" strip_button="DS1_route" strip_icon="path.png">
-      <go wp="D3" approaching_time="0"/>
+      <go approaching_time="0" wp="D3"/>
       <go from="D3" hmode="route" wp="D2"/>
-      <go from="D2" hmode="route" wp="CIR"/>
-      <go from="CIR" hmode="route" wp="D5"/>
+      <circle alt="GetAltRef()+120" radius="50" until="NavCircleCount() > 0.5" wp="CIR"/>
+      <go wp="D5"/>
       <deroute block="wait"/>
     </block>
     <block group="DS6" name="wait" strip_button="waitSTDBY" strip_icon="home.png">
       <circle radius="nav_radius" wp="STDBY"/>
     </block>
-    
     <block group="land" name="Land Right AF-TD" strip_button="Land right (wp AF-TD)" strip_icon="land-right.png">
       <set value="DEFAULT_CIRCLE_RADIUS" var="nav_radius"/>
       <deroute block="land"/>

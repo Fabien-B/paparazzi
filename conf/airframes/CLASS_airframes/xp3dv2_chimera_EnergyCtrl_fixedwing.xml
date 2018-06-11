@@ -128,6 +128,7 @@
     <define name="NOMINAL_AIRSPEED" value="12." unit="m/s"/>
     <define name="CARROT" value="5." unit="s"/>
     <define name="DEFAULT_CIRCLE_RADIUS" value="80."/>
+    <define name="XBEE_INIT" value="\"ATID3332\rATCH17\rATP1\rATBD6\r\""/>
   </section>
 
  <section name="VERTICAL CONTROL" prefix="V_CTL_">

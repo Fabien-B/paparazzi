@@ -172,6 +172,25 @@
         <arg flag="-udp_broadcast"/>
       </program>
     </session>
+    <session name="Zagi_DarkKnight_GVF">
+      <program name="Simulator">
+        <arg flag="-a" constant="Dark_knight_gvf"/>
+        <arg flag="-t" constant="nps"/>
+      </program>
+      <program name="GCS">
+        <arg flag="-layout" constant="large_left_col.xml"/>
+      </program>
+      <program name="Server">
+        <arg flag="-n"/>
+      </program>
+      <program name="Data Link">
+        <arg flag="-udp"/>
+        <arg flag="-udp_broadcast"/>
+      </program>
+      <program name="Simulator">
+        <arg flag="-a" constant="Zagi_XP3V2_gvf"/>
+      </program>
+    </session>
     <session name="Flight USB-serial Redundant">
       <program name="Server"/>
       <program name="GCS"/>
@@ -318,7 +337,9 @@
         <arg flag="-s" constant="57600"/>
       </program>
       <program name="Server"/>
-      <program name="GCS"/>
+      <program name="GCS">
+        <arg flag="-m" constant="deenethorpeSC1.xml"/>
+      </program>
     </session>
     <session name="Scenario1">
       <program name="Simulator">

@@ -1,25 +1,28 @@
 <!DOCTYPE flight_plan SYSTEM "../flight_plan.dtd">
 
-<flight_plan alt="260" ground_alt="185" lat0="52.5047299" lon0="-0.5949611" max_dist_from_home="500" name="Basic" qfu="220" security_height="25">
+<flight_plan alt="223" ground_alt="103" lat0="52.5037920" lon0="-0.5979750" max_dist_from_home="1000" name="Basic" qfu="220" security_height="25">
   <header>
 #include "subsystems/datalink/datalink.h"
 </header>
   <waypoints>
-    <waypoint name="HOME" x="0.0" y="0.0"/>
-    <waypoint name="STDBY" x="-130.9" y="-134.9"/>
+    <waypoint lat="52.5037920" lon="-0.5979750" name="HOME"/>
+    <waypoint alt="223.0" lat="52.503290" lon="-0.598423" name="STDBY"/>
     <waypoint name="MOB" x="200.3" y="361.1"/>
     <waypoint alt="215.0" name="AF" x="137.2" y="55.9"/>
     <waypoint alt="185.0" name="TD" x="78.4" y="-8.5"/>
     <waypoint name="_BASELEG" x="79.5" y="116.7"/>
-    <waypoint name="CLIMB" x="-76.1" y="-74.9"/>
-    <waypoint name="D1" x="-195.6" y="-210.4"/>
-    <waypoint name="D2" x="84.0" y="-43.1"/>
-    <waypoint name="D3" x="221.6" y="278.1"/>
-    <waypoint name="D4" x="-260.2" y="218.3"/>
-    <waypoint name="D5" x="-65.7" y="74.6"/>
-    <waypoint name="GK" x="528.9" y="668.2"/>
+    <waypoint name="CLIMB" x="118.0" y="107.6"/>
+    <waypoint alt="223.0" lat="52.5032745" lon="-0.5971540" name="D2"/>
+    <waypoint alt="223.0" lat="52.5067281" lon="-0.5929796" name="D3"/>
+    <waypoint alt="223.0" lat="52.5070689" lon="-0.5989243" name="D4"/>
+    <waypoint alt="223.0" lat="52.5039169" lon="-0.5977624" name="D5"/>
+    <waypoint alt="223.0" lat="52.504597" lon="-0.595169" name="ACCIDENT"/>
+    <waypoint alt="223.0" lat="52.5106722" lon="-0.5867972" name="GK"/>
+    <waypoint alt="223.0" lat="52.5019178" lon="-0.6011632" name="CIR"/>
   </waypoints>
-  <exceptions/>
+  <variables>
+    <variable var="nb_glides" init="0" type="int"/>
+  </variables>
   <blocks>
     <block name="Wait GPS">
       <set value="1" var="autopilot.kill_throttle"/>
@@ -39,23 +42,61 @@
       <set value="0" var="autopilot.flight_time"/>
       <go from="HOME" pitch="15" throttle="1.0" vmode="throttle" wp="CLIMB"/>
     </block>
+    
     <block group="home" key="Ctrl+a" name="Standby" strip_button="Standby" strip_icon="home.png">
+      <circle radius="nav_radius" wp="STDBY" until="NavCircleCount() > 2" alt="GetAltRef()+60"/>
+      <deroute block="DS1_CIR"/>
+    </block>
+    <block group="home" key="Ctrl+a" name="high_standby" strip_button="high_standby">
+      <circle radius="nav_radius" wp="STDBY" until="NavCircleCount() > 1" alt="GetAltRef()+120"/>
+      <deroute block="DS1_CIR"/>
+    </block>
+    
+    <block group="common" name="DS1_CIR" strip_button="CIR">
+      <circle radius="nav_radius" wp="CIR" until="NavCircleCount() > 0.5"/>
+      <deroute block="DS1_route"/>
+    </block>
+    <block group="common" name="DS1_route" strip_button="DS1_route" strip_icon="path.png">
+      <go wp="D2"/>
+      <go from="D2" hmode="route" wp="D3"/>
+      <circle radius="nav_radius" wp="D4" until="NavCircleCount() > 1"/>
+      <deroute block="climb_maximum_alt"/>
+    </block>
+    
+    <block group="home" name="wait" strip_button="waitSTDBY" strip_icon="home.png">
       <circle radius="nav_radius" wp="STDBY"/>
     </block>
-    <block group="mission" name="Route  D1 D2 D3 D4 D5" strip_button="route" strip_icon="path.png">
-      <go from="STDBY" hmode="route" wp="D1"/>
-      <go from="D1" hmode="route" wp="D2"/>
+    
+    
+    <!--block group="DS2" name="DS2.AC2" strip_button="route" strip_icon="path.png">
+      <go wp="D2"/>
       <go from="D2" hmode="route" wp="D3"/>
-      <go from="D3" hmode="route" wp="D4"/>
-      <go from="D4" hmode="route" wp="D5"/>
-      <deroute block="GNSS_failure"/>
+      <circle radius="nav_radius" wp="ACCIDENT"/>
+    </block>
+    <block group="DS3" name="DS3.AC* circle_D5">
+      <circle radius="nav_radius" wp="D5"/>
+    </block-->
+    
+    <block group="DS5" name="climb_maximum_alt" strip_button="climb max D4">
+      <circle alt="GetAltRef()+130" radius="nav_radius" until="(GetPosAlt()-GetAltRef())>120" wp="D4"/>
+      <deroute block="glide_D5"/>
+      <exception cond="nb_glides > 1" deroute="wait"/>
+    </block>
+    <block group="DS5" name="glide_D5" strip_button="glide D5">
+      <set var="nb_glides" value="nb_glides + 1"/>
+      <circle radius="nav_radius" throttle="0.0" until="60>(GetPosAlt()-GetAltRef())" vmode="throttle" wp="D5"/>
+      <circle alt="GetAltRef()+55" radius="nav_radius" until="stage_time > 3" vmode="alt" wp="D5"/>
+      <go wp="D4"/>
+      <deroute block="climb_maximum_alt"/>
+      <!--exception cond="nb_glides > 2" deroute="wait"/-->
+    </block>
+    
+    <block group="utile" name="circle_D4">
+      <circle radius="nav_radius" wp="D4"/>
     </block>
     <block group="mission" name="GNSS_failure" strip_button="GPS failure" strip_icon="gps.png">
       <go from="D5" hmode="route" wp="D3"/>
-      <deroute block="circle_D3"/>
-    </block>
-    <block name="circle_D3">
-      <circle radius="nav_radius" wp="D3"/>
+      <deroute block="circle_D4"/>
     </block>
     <block group="base_pattern" name="MOB" strip_button="Circle around here" strip_icon="mob.png">
       <call_once fun="NavSetWaypointHere(WP_MOB)"/>
