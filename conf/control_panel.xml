@@ -132,80 +132,6 @@
         <arg flag="-f" constant="5"/>
       </program>
     </session>
-    <session name="Scenario2">
-      <program name="Simulator">
-        <arg flag="-a" constant="SC2_AC1"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-        <arg flag="-m" constant="deenethorpeSC2.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-      <program name="Simulator">
-        <arg flag="-a" constant="SC2_AC2"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-    </session>
-    <session name="Scenario3">
-      <program name="Simulator">
-        <arg flag="-a" constant="SC3_AC1"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-        <arg flag="-m" constant="deenethorpeSC3.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-    </session>
-    <session name="Scenario6">
-      <program name="Simulator">
-        <arg flag="-a" constant="SC6_AC1"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-        <arg flag="-m" constant="deenethorpeSC6.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-    </session>
-    <session name="Zagi_DarkKnight_GVF">
-      <program name="Simulator">
-        <arg flag="-a" constant="Dark_knight_gvf"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-      <program name="Simulator">
-        <arg flag="-a" constant="Zagi_XP3V2_gvf"/>
-      </program>
-    </session>
     <session name="Flight USB-serial Redundant">
       <program name="Server"/>
       <program name="GCS"/>
@@ -234,69 +160,12 @@
         <arg flag="-ac" constant="@AIRCRAFT"/>
       </program>
     </session>
-    <session name="Scenario4">
-      <program name="Simulator">
-        <arg flag="-a" constant="SC4_AC1"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-        <arg flag="-m" constant="deenethorpeSC4.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-      <program name="Simulator">
-        <arg flag="-a" constant="SC4_AC2"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-    </session>
-    <session name="Scenario5">
-      <program name="Simulator">
-        <arg flag="-a" constant="SC5_AC1_proposal"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-        <arg flag="-m" constant="deenethorpeSC5.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-    </session>
     <session name="Flight USB-serial@9600">
       <program name="Data Link">
         <arg flag="-d" constant="/dev/ttyUSB0"/>
       </program>
       <program name="Server"/>
       <program name="GCS"/>
-    </session>
-    <session name="testSession">
-      <program name="Data Link">
-        <arg flag="-d" constant="/dev/ttyUSB0"/>
-        <arg flag="-s" constant="57600"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Messages"/>
-      <program name="Settings">
-        <arg flag="-ac" constant="SC2_AC2"/>
-      </program>
-      <program name="Simulator">
-        <arg flag="-a" constant="SC2_AC1"/>
-      </program>
-      <program name="Simulator">
-        <arg flag="-a" constant="SC2_AC2"/>
-      </program>
     </session>
     <session name="Raw Sensors">
       <program name="Data Link">
@@ -356,23 +225,6 @@
         <arg flag="-m" constant="deenethorpeSC1.xml"/>
       </program>
     </session>
-    <session name="Scenario1">
-      <program name="Simulator">
-        <arg flag="-a" constant="SC1_AC1"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-        <arg flag="-m" constant="deenethorpeSC1.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-    </session>
     <session name="Flight USB-serial@57600">
       <program name="Data Link">
         <arg flag="-d" constant="/dev/ttyUSB0"/>
@@ -419,25 +271,6 @@
       </program>
       <program name="Server"/>
       <program name="GCS"/>
-    </session>
-    <session name="QAD">
-      <program name="Simulator">
-        <arg flag="-a" constant="QAD_rotorcraft"/>
-        <arg flag="-t" constant="nps"/>
-      </program>
-      <program name="GCS">
-        <arg flag="-layout" constant="large_left_col.xml"/>
-      </program>
-      <program name="Server">
-        <arg flag="-n"/>
-      </program>
-      <program name="Data Link">
-        <arg flag="-udp"/>
-        <arg flag="-udp_broadcast"/>
-      </program>
-      <program name="Simulator">
-        <arg flag="-a" constant="QAD_Wing"/>
-      </program>
     </session>
   </section>
 </control_panel>
