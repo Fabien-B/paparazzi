@@ -117,6 +117,21 @@
         <arg flag="-c" constant="*:telemetry:IMU_MAG_SCALED:mz:0.0004883"/>
       </program>
     </session>
+    <session name="nimp2">
+      <program name="Data Link">
+        <arg flag="-d" constant="/dev/ttyUSB0"/>
+        <arg flag="-transport" constant="xbee"/>
+        <arg flag="-s" constant="57600"/>
+      </program>
+      <program name="Server"/>
+      <program name="GCS"/>
+      <program name="NatNet3">
+        <arg flag="-ac" constant="50"/>
+        <arg flag="50"/>
+        <arg flag="-s" constant="192.168.1.230"/>
+        <arg flag="-f" constant="5"/>
+      </program>
+    </session>
     <session name="Scenario2">
       <program name="Simulator">
         <arg flag="-a" constant="SC2_AC1"/>
