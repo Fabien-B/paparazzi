@@ -82,6 +82,11 @@
       <define name="MEASURE_AIRSPEED"/>
       <define name="AIRSPEED_SEND_RAW"/>
     </module> -->
+    
+    <module name="droneitgps">
+      <configure name="DRONEIT_PORT" value="UART6"/>
+      <!--configure name="DRONEIT_BAUD" value="B115200"/-->
+    </module>
 
   </firmware>
 
