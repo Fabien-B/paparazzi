@@ -36,9 +36,9 @@
 #define RAD_TO_DEG 57.29577951308232
 
 #define COORD_FACTOR ((1<<30)/180.)
-#define ALT_FACTOR 10
+#define ALT_FACTOR 100
 #define TOD_FACTOR 128
-#define MS_PER_DAY 86400000
+#define S_PER_DAY 86400
 
 union Data_item { //union to manage endianness
   int32_t i;
@@ -55,14 +55,18 @@ void droneitgps_init() {
 
 
 void droneitgps_periodic() {
-
+  
+  if(!gps.fix) {
+    return;
+  }
+  
   struct LlaCoor_f pos = *stateGetPositionLla_f();
   union Data_item lat, lon, alt, tod;
 
   lat.i = pos.lat * RAD_TO_DEG* COORD_FACTOR;
   lon.i = pos.lon * RAD_TO_DEG *COORD_FACTOR;
-  alt.i = pos.alt * ALT_FACTOR;
-  tod.ui = ((gps.tow % MS_PER_DAY)*TOD_FACTOR)/1000;    //GPS Time of Week in ms
+  alt.i = gps.hmsl / ALT_FACTOR;
+  tod.ui = ((gps.tow/1000) % S_PER_DAY)*TOD_FACTOR;    //GPS Time of Week in ms
 
 // The CAT129 data should be in big endian, but we use little endian
 
