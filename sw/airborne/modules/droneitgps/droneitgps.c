@@ -29,6 +29,7 @@
 #include "mcu_periph/uart.h"
 #include "subsystems/gps.h"
 #include "generated/airframe.h"
+#include "bdm_crc.h"
 
 #define STR_(s) #s
 #define STR(s) STR_(s)
@@ -39,15 +40,17 @@
 #define ALT_FACTOR 100
 #define TOD_FACTOR 128
 #define S_PER_DAY 86400
+#define LEAP_SECONDS 18
 
 union Data_item { //union to manage endianness
   int32_t i;
   uint32_t ui;
+  Bdm_crc16_t bdm_crc;
   char c[4];
 };
 
 struct uart_periph *dev;
-uint8_t data[16];
+uint8_t data[18];
 
 void droneitgps_init() {
   dev = &(DRONEIT_DEV);
@@ -56,17 +59,19 @@ void droneitgps_init() {
 
 void droneitgps_periodic() {
   
-  if(!gps.fix) {
-    return;
-  }
-  
+  //if(!gps.fix) {
+  //  return;
+  //}
+  union Data_item crc;
+  crc.bdm_crc = Bdm_crc16_init();  
+
   struct LlaCoor_f pos = *stateGetPositionLla_f();
   union Data_item lat, lon, alt, tod;
 
   lat.i = pos.lat * RAD_TO_DEG* COORD_FACTOR;
   lon.i = pos.lon * RAD_TO_DEG *COORD_FACTOR;
   alt.i = gps.hmsl / ALT_FACTOR;
-  tod.ui = ((gps.tow/1000) % S_PER_DAY)*TOD_FACTOR;    //GPS Time of Week in ms
+  tod.ui = (((gps.tow/1000) - LEAP_SECONDS) % S_PER_DAY)*TOD_FACTOR;    //TODO: What happen sunday between 00:00:00 and 00:00:18 ?
 
 // The CAT129 data should be in big endian, but we use little endian
 
@@ -91,7 +96,11 @@ void droneitgps_periodic() {
   data[14] = 0;
   data[15] = 0;
 
-  uart_put_buffer(dev, 0, data, 16);
+  crc.bdm_crc = Bdm_crc16_update(crc.bdm_crc, data, 16);
+  data[15] = crc.c[0];
+  data[16] = crc.c[1];
+
+  uart_put_buffer(dev, 0, data, 18);
 }
 
 

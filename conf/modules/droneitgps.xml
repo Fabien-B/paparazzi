@@ -21,6 +21,7 @@
     <define name="$(DRONEIT_PORT_UPPER)_BAUD" value="$(DRONEIT_BAUD)"/>
     
     <file name="droneitgps.c"/>
+    <file name="bdm_crc.c"/>
   </makefile>
 </module>
 
