@@ -44,7 +44,7 @@
     
     <module name="droneitgps">
       <configure name="DRONEIT_PORT" value="UART2"/>
-      <!--configure name="DRONEIT_BAUD" value="B115200"/-->
+      <configure name="DRONEIT_BAUD" value="B9600"/>
     </module>
 
   </firmware>
