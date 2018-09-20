@@ -59,9 +59,9 @@ void droneitgps_init() {
 
 void droneitgps_periodic() {
   
-  //if(!gps.fix) {
-  //  return;
-  //}
+  if(!gps.fix) {
+    return;
+  }
   union Data_item crc;
   crc.bdm_crc = Bdm_crc16_init();  
 
@@ -97,8 +97,8 @@ void droneitgps_periodic() {
   data[15] = 0;
 
   crc.bdm_crc = Bdm_crc16_update(crc.bdm_crc, data, 16);
-  data[15] = crc.c[1];
-  data[16] = crc.c[0];
+  data[16] = crc.c[1];
+  data[17] = crc.c[0];
 
   uart_put_buffer(dev, 0, data, 18);
 }

@@ -12,7 +12,7 @@
   <init fun="droneitgps_init()"/>
   <periodic fun="droneitgps_periodic()" freq="0.25" autorun="TRUE"/>
   <!--makefile target="ap|fbw"-->
-  <makefile>
+  <makefile target="ap">
     <configure name="DRONEIT_PORT"  case="upper|lower"/>
     <configure name="DRONEIT_BAUD" default="B115200"/>
     
