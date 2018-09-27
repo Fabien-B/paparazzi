@@ -59,46 +59,51 @@ void droneitgps_init() {
 
 void droneitgps_periodic() {
   
-  if(!gps.fix) {
-    return;
+  if(gps.fix) {
+    union Data_item crc;
+    crc.bdm_crc = Bdm_crc16_init();  
+
+    struct LlaCoor_f pos = *stateGetPositionLla_f();
+    union Data_item lat, lon, alt, tod;
+
+    lat.i = pos.lat * RAD_TO_DEG* COORD_FACTOR;
+    lon.i = pos.lon * RAD_TO_DEG *COORD_FACTOR;
+    alt.i = gps.hmsl / ALT_FACTOR;
+    tod.ui = (((gps.tow/1000) - LEAP_SECONDS) % S_PER_DAY)*TOD_FACTOR;    //TODO: What happen sunday between 00:00:00 and 00:00:18 ?
+
+  // The CAT129 data should be in big endian, but we use little endian
+
+    data[0] = lat.c[3];  
+    data[1] = lat.c[2];  
+    data[2] = lat.c[1];  
+    data[3] = lat.c[0];
+
+    data[4] = lon.c[3];  
+    data[5] = lon.c[2];  
+    data[6] = lon.c[1];  
+    data[7] = lon.c[0];
+
+    data[8] = alt.c[2];  
+    data[9] = alt.c[1];  
+    data[10] = alt.c[0];  
+
+    data[11] = tod.c[2];
+    data[12] = tod.c[1];
+    data[13] = tod.c[0];
+
+    data[14] = 0;
+    data[15] = 0;
+
+    crc.bdm_crc = Bdm_crc16_update(crc.bdm_crc, data, 16);
+    data[16] = crc.c[1];
+    data[17] = crc.c[0];
   }
-  union Data_item crc;
-  crc.bdm_crc = Bdm_crc16_init();  
-
-  struct LlaCoor_f pos = *stateGetPositionLla_f();
-  union Data_item lat, lon, alt, tod;
-
-  lat.i = pos.lat * RAD_TO_DEG* COORD_FACTOR;
-  lon.i = pos.lon * RAD_TO_DEG *COORD_FACTOR;
-  alt.i = gps.hmsl / ALT_FACTOR;
-  tod.ui = (((gps.tow/1000) - LEAP_SECONDS) % S_PER_DAY)*TOD_FACTOR;    //TODO: What happen sunday between 00:00:00 and 00:00:18 ?
-
-// The CAT129 data should be in big endian, but we use little endian
-
-  data[0] = lat.c[3];  
-  data[1] = lat.c[2];  
-  data[2] = lat.c[1];  
-  data[3] = lat.c[0];
-
-  data[4] = lon.c[3];  
-  data[5] = lon.c[2];  
-  data[6] = lon.c[1];  
-  data[7] = lon.c[0];
-
-  data[8] = alt.c[2];  
-  data[9] = alt.c[1];  
-  data[10] = alt.c[0];  
-
-  data[11] = tod.c[2];
-  data[12] = tod.c[1];
-  data[13] = tod.c[0];
-
-  data[14] = 0;
-  data[15] = 0;
-
-  crc.bdm_crc = Bdm_crc16_update(crc.bdm_crc, data, 16);
-  data[16] = crc.c[1];
-  data[17] = crc.c[0];
+  else {
+    int i = 0;
+    for(i=0;i<18;i++) {
+      data[i] = 0;
+    }
+  }
 
   uart_put_buffer(dev, 0, data, 18);
 }
