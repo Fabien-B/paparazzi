@@ -218,7 +218,7 @@
 
     <!-- Cruise throttle + limits -->
     <define name="AUTO_THROTTLE_NOMINAL_CRUISE_THROTTLE" value="0.45"/>
-    <define name="AUTO_THROTTLE_MIN_CRUISE_THROTTLE" value="0.35"/>
+    <define name="AUTO_THROTTLE_MIN_CRUISE_THROTTLE" value="0.40"/>
     <define name="AUTO_THROTTLE_MAX_CRUISE_THROTTLE" value="0.85"/>
 
     <!-- Climb loop (throttle) -->

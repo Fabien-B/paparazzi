@@ -32,7 +32,7 @@
     <module name="imu"           type="elle0"/>
     <module name="stabilization" type="int_quat"/>
     <module name="ahrs"          type="int_cmpl_quat"/>
-    <module name="ins" type="gps_passthrough"/>
+    <module name="ins"/>
     
     <!--module name="gps"           type="datalink"/-->
     <module name="gps"     type="ublox">
@@ -124,8 +124,8 @@
     <define name="H_Z" value="0.9259921"/>
 
     <!-- Use GPS heading instead of magneto -->
-    <define name="USE_GPS_HEADING" value="1"/>
-    <define name="HEADING_UPDATE_GPS_MIN_SPEED" value="0"/>
+    <!--define name="USE_GPS_HEADING" value="0"/>
+    <define name="HEADING_UPDATE_GPS_MIN_SPEED" value="0"/-->
   </section>
 
 

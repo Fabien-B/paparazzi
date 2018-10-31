@@ -20,7 +20,7 @@
     <module name="ahrs" type="float_dcm"/>
     <module name="ins" type="alt_float"/>
     <module name="telemetry" type="xbee_api"/>  
-
+    
     <module name="imu" type="apogee">
     </module>
 
@@ -140,6 +140,7 @@
   </section>
 
   <section name="MISC">
+    <define name="XBEE_CHANNEL" value="17"/>
     <define name="NOMINAL_AIRSPEED" value="12." unit="m/s"/>
     <define name="CARROT" value="5." unit="s"/>
     <define name="DEFAULT_CIRCLE_RADIUS" value="80."/>

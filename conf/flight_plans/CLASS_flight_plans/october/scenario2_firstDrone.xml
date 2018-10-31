@@ -5,7 +5,7 @@
 #include "subsystems/datalink/datalink.h"
 </header>
   <waypoints>
-    <waypoint lat="52.5037920" lon="-0.5979750" name="HOME"/>
+    <waypoint lat="52.502608" lon="-0.597933" name="HOME"/>
     <waypoint lat="52.501937" lon="-0.598089" name="STDBY"/>
     <waypoint alt="215.0" name="AF" x="137.2" y="55.9"/>
     <waypoint alt="185.0" name="TD" x="78.4" y="-8.5"/>
