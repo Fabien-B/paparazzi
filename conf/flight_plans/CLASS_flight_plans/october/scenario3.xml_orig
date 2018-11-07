@@ -1,0 +1,78 @@
+<!DOCTYPE flight_plan SYSTEM "../../flight_plan.dtd">
+
+<flight_plan alt="223" ground_alt="103" lat0="52.5037920" lon0="-0.5979750" max_dist_from_home="1000" name="Basic" qfu="30" security_height="25">
+  <header>
+#include "subsystems/datalink/datalink.h"
+</header>
+  <waypoints>
+    <waypoint lat="52.5037920" lon="-0.5979750" name="HOME"/>
+    <waypoint lat="52.501562" lon="-0.598972" name="STDBY"/>
+    <waypoint alt="215.0" name="AF" x="137.2" y="55.9"/>
+    <waypoint alt="185.0" name="TD" x="78.4" y="-8.5"/>
+    <waypoint name="_BASELEG" x="79.5" y="116.7"/>
+    <waypoint name="CLIMB" x="8.8" y="-338.0"/>
+    <waypoint alt="223.0" lat="52.5106722" lon="-0.5867972" name="GK"/>
+    <waypoint alt="223" name="wp1" x="192.7" y="18.7"/>
+    <waypoint alt="223" name="wp2" x="-118.9" y="-70.8"/>
+    <waypoint alt="223" name="wp3" x="0.8" y="258.8"/>
+    <waypoint alt="223" name="wp4" x="359.7" y="150.1"/>
+    <waypoint alt="223" name="wp5" x="257.5" y="98.5"/>
+    <waypoint alt="223" name="wp6" x="-58.2" y="152.0"/>
+    <waypoint alt="160" name="csm" x="7.2" y="-170.3"/>
+  </waypoints>
+  <blocks>
+    <block name="Wait GPS">
+      <set value="1" var="autopilot.kill_throttle"/>
+      <while cond="!GpsFixValid()"/>
+    </block>
+    <block name="Geo init">
+      <while cond="LessThan(NavBlockTime(), 10)"/>
+      <call_once fun="NavSetGroundReferenceHere()"/>
+    </block>
+    <block name="Holding point">
+      <set value="1" var="autopilot.kill_throttle"/>
+      <attitude roll="0" throttle="0" vmode="throttle"/>
+    </block>
+    <block group="home" key="t" name="Takeoff" strip_button="Takeoff (wp CLIMB)" strip_icon="takeoff.png">
+      <exception cond="GetPosAlt() > GetAltRef()+25" deroute="csm"/>
+      <set value="0" var="autopilot.kill_throttle"/>
+      <set value="0" var="autopilot.flight_time"/>
+      <go from="HOME" pitch="15" throttle="1.0" vmode="throttle" wp="CLIMB"/>
+    </block>
+    <block group="csm" name="csm" strip_button="SimTrack" strip_icon="path.png">
+      <circle alt="GetAltRef()+40" radius="50" until="NavCircleCount() > 1" vmode="alt" wp="csm"/>
+      <circle alt="238" radius="50" until="NavCircleCount() > 2" vmode="alt" wp="csm"/>
+    </block>
+    <block group="track2" name="track2" strip_button="SimTrack" strip_icon="path.png">
+      <go wp="wp4"/>
+      <oval p1="wp6" p2="wp3" radius="-60" until="nav_oval_count > 0"/>
+    </block>
+    <block group="track3" name="track3" strip_button="SimTrack" strip_icon="path.png">
+      <circle radius="-100" until="stage_time>45" wp="wp2"/>
+    </block>
+    <block group="csm" name="wait" strip_button="Wait">
+      <circle alt="GetAltRef()+40" radius="50" vmode="alt" wp="csm"/>
+    </block>
+    <block group="land" name="Land Right AF-TD" strip_button="Land right (wp AF-TD)" strip_icon="land-right.png">
+      <set value="DEFAULT_CIRCLE_RADIUS" var="nav_radius"/>
+      <deroute block="land"/>
+    </block>
+    <block group="land" name="Land Left AF-TD" strip_button="Land left (wp AF-TD)" strip_icon="land-left.png">
+      <set value="-DEFAULT_CIRCLE_RADIUS" var="nav_radius"/>
+      <deroute block="land"/>
+    </block>
+    <block name="land">
+      <call_once fun="nav_compute_baseleg(WP_AF, WP_TD, WP__BASELEG, nav_radius)"/>
+      <circle radius="nav_radius" until="NavCircleCount() > 0.5" wp="_BASELEG"/>
+      <circle radius="nav_radius" until="And(NavQdrCloseTo(DegOfRad(baseleg_out_qdr)-(nav_radius/fabs(nav_radius))*10), 10 > fabs(GetPosAlt() - WaypointAlt(WP__BASELEG)))" wp="_BASELEG"/>
+    </block>
+    <block name="final">
+      <exception cond="GetAltRef() + 10 > GetPosAlt()" deroute="flare"/>
+      <go from="AF" hmode="route" vmode="glide" wp="TD"/>
+    </block>
+    <block name="flare">
+      <go approaching_time="0" from="AF" hmode="route" throttle="0.0" vmode="throttle" wp="TD"/>
+      <attitude roll="0.0" throttle="0.0" until="FALSE" vmode="throttle"/>
+    </block>
+  </blocks>
+</flight_plan>
