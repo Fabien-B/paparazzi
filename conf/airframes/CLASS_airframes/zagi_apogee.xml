@@ -43,9 +43,12 @@
     <module name="logger" type="sd_chibios"/>
     <module name="flight_recorder"/>
     
-    <module name="droneitgps">
-      <configure name="DRONEIT_PORT" value="UART6"/>
-      <configure name="DRONEIT_BAUD" value="B9600"/>
+    <module name="e_identification_fr">
+      <configure name="E_ID_PORT" value="UART6"/>
+      <configure name="E_ID_BAUD" value="B115200"/>
+      <define name="ID_MANUFACTURER" value="ENA"  type="string"/>
+      <define name="ID_MODEL" value="ZAG"  type="string"/>
+      <define name="ID_SERIAL" value="JoLeRigolo"  type="string"/>
     </module>
 
   </firmware>

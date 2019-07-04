@@ -37,6 +37,7 @@
       <exception cond="GetPosAlt() > GetAltRef()+25" deroute="csm"/>
       <set value="0" var="autopilot.kill_throttle"/>
       <set value="0" var="autopilot.flight_time"/>
+      <call_once fun="E_Identification_Fr_Start()"/>
       <go from="HOME" pitch="15" throttle="1.0" vmode="throttle" wp="CLIMB"/>
     </block>
     <block group="csm" name="csm" strip_button="SimTrack" strip_icon="path.png">
@@ -71,6 +72,7 @@
       <go from="AF" hmode="route" vmode="glide" wp="TD"/>
     </block>
     <block name="flare">
+      <call_once fun="E_Identification_Fr_Stop()"/>
       <go approaching_time="0" from="AF" hmode="route" throttle="0.0" vmode="throttle" wp="TD"/>
       <attitude roll="0.0" throttle="0.0" until="FALSE" vmode="throttle"/>
     </block>
