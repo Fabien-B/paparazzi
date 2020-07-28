@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Paparazzi Center &mdash; PaparazziUAV _devel documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Flight Simulation" href="first_simulation.html" />
+    <link rel="prev" title="Quick Install" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PaparazziUAV
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index_start.html">QuickStart</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="install.html">Quick Install</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Paparazzi Center</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-panel">Configuration panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-panel">Building panel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#execution-and-running-agents-panels">Execution and Running agents panels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#console-panel">Console panel</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="first_simulation.html">Flight Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_flight.html">Experimental Flight</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../user_guide/index_user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/index_developer.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index_tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support/index_support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PaparazziUAV</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index_start.html">QuickStart</a> &raquo;</li>
+        
+      <li>Paparazzi Center</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/quickstart/paparazzi_center_tour.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="paparazzi-center">
+<h1>Paparazzi Center<a class="headerlink" href="#paparazzi-center" title="Permalink to this headline">¶</a></h1>
+<p>The Paparazzi Center is composed of 5 panels, as shown in the image below.</p>
+<img alt="../_images/pprz_center.png" src="../_images/pprz_center.png" />
+<div class="section" id="configuration-panel">
+<h2>Configuration panel<a class="headerlink" href="#configuration-panel" title="Permalink to this headline">¶</a></h2>
+<p>This panel is dedicated to the configuration of the aircrafts. You can change the current aircraft with the <em>A/C</em> combobox.</p>
+<p>The <em>id</em> field is the <strong>uniq</strong> identifier of the aircraft, between 0 and 255.</p>
+<p>An aircraft is composed of an airframe, a flight plan, some settings, a radio and a telemetry configuration file. These concepts are explained in the <a class="reference internal" href="../user_guide/index_user_guide.html"><span class="doc">User Guide</span></a>.</p>
+</div>
+<div class="section" id="building-panel">
+<h2>Building panel<a class="headerlink" href="#building-panel" title="Permalink to this headline">¶</a></h2>
+<p>This panel lets you choose for wich target you want to build the firmware with the <strong>Target</strong> combobox. Build and clean the firmware with the <em>Build</em> and <em>Clean</em> buttons.</p>
+<p>Some usual targets are:</p>
+<ul class="simple">
+<li><p><strong>sim</strong>: The basic fixedwing simulator written in OCaml without IMU simulation or any sensor models (noise, bias, etc) and mainly intended to validate your flight plan logic.</p></li>
+<li><p><strong>nps</strong>: NPS is a more advanced rotorcraft and fixedwing simulator with sensor models and commonly uses JSBSim as FDM (Flight Dynamic Model).</p></li>
+<li><p><strong>ap</strong>: This is for a <em>real</em> autopilot.</p></li>
+</ul>
+<p>If the selected target is not a simulator, you can choose how you want to flash the board by choosing the <strong>Flash mode</strong>. Click on <em>Upload</em> to load the firmware on the board.</p>
+</div>
+<div class="section" id="execution-and-running-agents-panels">
+<h2>Execution and Running agents panels<a class="headerlink" href="#execution-and-running-agents-panels" title="Permalink to this headline">¶</a></h2>
+<p>In the Execution panel, a combo box provide a set of predefined and user sessions (collections of programs).</p>
+<p>The Simulation session runs a server, a GCS and a simulator for the aircraft selected in the configuration panel. Note that <em>sim</em> or <em>nps</em> target must have been built prior to the simulation.</p>
+<p>The launched programs can be stopped and restarted (Stop/Redo buttons).</p>
+</div>
+<div class="section" id="console-panel">
+<h2>Console panel<a class="headerlink" href="#console-panel" title="Permalink to this headline">¶</a></h2>
+<p>All messages from the programs run from the Paparazzi center will be displayed here. Error messages will be display in red, warnings in orange, and messages in green.</p>
+<p>Now, lets launch a <a class="reference internal" href="first_simulation.html"><span class="doc">Flight Simulation</span></a>!</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="first_simulation.html" class="btn btn-neutral float-right" title="Flight Simulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="install.html" class="btn btn-neutral float-left" title="Quick Install" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Paparazzi UAV Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

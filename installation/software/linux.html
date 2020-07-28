@@ -88,12 +88,16 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../quickstart/index_start.html">QuickStart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index_tutorials.html">Tutorials</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index_installation.html">Installation</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index_software.html">Software</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Linux</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mac_os.html">MAC OS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="windows.html">Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index_software.html#downloading-the-software">Downloading the software</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index_software.html#os-specific-instructions">OS-specific instructions</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="mac_os.html">MAC OS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="windows.html">Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index_software.html#buiding-and-running-the-code">Buiding and running the code</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../hardware/index_hardware.html">Hardware</a></li>
@@ -101,6 +105,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../user_guide/index_user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developer_guide/index_developer.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index_tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../support/index_support.html">Support</a></li>
 </ul>
 
@@ -173,7 +178,100 @@
             
   <div class="section" id="linux">
 <h1>Linux<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This guide may be outdated. See <a class="reference external" href="http://wiki.paparazziuav.org/wiki/Installation">http://wiki.paparazziuav.org/wiki/Installation</a>.</p>
+</div>
+<p>Paparazzi is very easily installed on any laptop or workstation running Ubuntu, Debian (or any of their derivatives).</p>
+<p>The steps required to install the software needed to be able to let your UAS fly</p>
+<ul class="simple">
+<li><p>Install the basic Paparazzi dependencies and the ARM cross compiling toolchain</p></li>
+<li><p>Download the source code from the source repository</p></li>
+<li><p>Allow access to your PC hardware connection by adding appropriate Udev rules</p></li>
+<li><p>Compile the binaries from the sources and launch the software</p></li>
+</ul>
+<p>Users of other Linux flavors than a recent Ubuntu or Debian and anyone needing manual control of each individual package can install them independently.</p>
+<div class="section" id="for-the-impatient">
+<h2>For the impatient<a class="headerlink" href="#for-the-impatient" title="Permalink to this headline">¶</a></h2>
+<p>For Ubuntu add the <a class="reference external" href="https://launchpad.net/~paparazzi-uav/+archive/ubuntu/ppa">paparazzi-uav ppa</a> (<em>sudo add-apt-repository ppa:paparazzi-uav/ppa</em>)
+and install the paparazzi-dev package.</p>
+<iframe width="425" height="239" src="https://www.youtube.com/embed/SshFJrBuku8" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+<div class="section" id="installation-of-dependencies">
+<h2>Installation of dependencies<a class="headerlink" href="#installation-of-dependencies" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ubuntu">
+<h3>Ubuntu<a class="headerlink" href="#ubuntu" title="Permalink to this headline">¶</a></h3>
+<p>Binary packages for Ubuntu are available for the i386, amd64 and armhf architectures.</p>
+<p>Add the installation sources for the Paparazzi software packages. Run from a terminal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">paparazzi</span><span class="o">-</span><span class="n">uav</span><span class="o">/</span><span class="n">ppa</span>
+</pre></div>
+</div>
+<p>Then update the systems package inventory and install the main Paparazzi software dependencies. This will take some time.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">paparazzi</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="debian">
+<h3>Debian<a class="headerlink" href="#debian" title="Permalink to this headline">¶</a></h3>
+<p>Binary packages for Debian are available for the i386 and amd64 architectures. armhf packages seem to be currently not supported by the OpenSUSE build service.</p>
+<p>For Debian Wheezy (7.0), Jessie (8.0) and Stretch (9.0) packages are built using the Open Build Service (OBS) on OpenSUSE Build Service project home:flixr:paparazzi-uav</p>
+<p>First add the key:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wget</span> <span class="o">-</span><span class="n">q</span> <span class="s2">&quot;http://download.opensuse.org/repositories/home:/flixr:/paparazzi-uav/Debian_9.0/Release.key&quot;</span> <span class="o">-</span><span class="n">O</span><span class="o">-</span> <span class="o">|</span> <span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">key</span> <span class="n">add</span> <span class="o">-</span>
+</pre></div>
+</div>
+<p>Add the appropriate repo, depending on your Debian version to sources.list</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="s2">&quot;deb http://download.opensuse.org/repositories/home:/flixr:/paparazzi-uav/Debian_9.0/ ./&quot;</span> <span class="o">|</span> <span class="n">tee</span> <span class="o">-</span><span class="n">a</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span>
+<span class="n">echo</span> <span class="s2">&quot;deb http://download.opensuse.org/repositories/home:/flixr:/paparazzi-uav/Debian_8.0/ ./&quot;</span> <span class="o">|</span> <span class="n">tee</span> <span class="o">-</span><span class="n">a</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span>
+<span class="n">echo</span> <span class="s2">&quot;deb http://download.opensuse.org/repositories/home:/flixr:/paparazzi-uav/Debian_7.0/ ./&quot;</span> <span class="o">|</span> <span class="n">tee</span> <span class="o">-</span><span class="n">a</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">apt</span><span class="o">/</span><span class="n">sources</span><span class="o">.</span><span class="n">list</span>
+</pre></div>
+</div>
+<p>Update the systems package inventory and install the main Paparazzi software dependencies.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">paparazzi</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="arm-embedded-toolchain">
+<h3>ARM embedded toolchain<a class="headerlink" href="#arm-embedded-toolchain" title="Permalink to this headline">¶</a></h3>
+<p>For current Paparazzi versions (v5.0 and above) the gcc-arm-embedded toolchain is recommended, which also supports the STM32F4 with FPU (hardware floating point).
+gcc-arm-none-eabi as Debian/Ubuntu package</p>
+<p>This is the recommended method</p>
+<p>Note that there are actually two different toolchains available!</p>
+<ul class="simple">
+<li><p>ARM gcc-arm-embedded toolchain with Debian package name gcc-arm-embedded</p>
+<ul>
+<li><p>includes libstdc++ and newlib-nano</p></li>
+</ul>
+</li>
+<li><p>Debian gcc-arm-none-eabi toolchain</p>
+<ul>
+<li><p>does not include libstdc++</p></li>
+<li><p>does not include newlib-nano</p></li>
+</ul>
+</li>
+</ul>
+<p>Both toolchains should work for most use-cases (if you don’t need C++ or nano specs), although the ARM gcc-arm-embedded toolchain is better tested.</p>
+<div class="section" id="gcc-arm-embedded-toolchain">
+<h4>gcc-arm-embedded toolchain<a class="headerlink" href="#gcc-arm-embedded-toolchain" title="Permalink to this headline">¶</a></h4>
+<p>This is the recommended toolchain</p>
+<p>On most Ubuntu versions the gcc-arm-embedded toolchain can be installed as a debian package from the ppa:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">add</span><span class="o">-</span><span class="n">apt</span><span class="o">-</span><span class="n">repository</span> <span class="n">ppa</span><span class="p">:</span><span class="n">team</span><span class="o">-</span><span class="n">gcc</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">embedded</span><span class="o">/</span><span class="n">ppa</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">gcc</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">embedded</span>
+</pre></div>
+</div>
+<p>Previously there was a PPA by terry.guo that contained this toolchain under the package name gcc-arm-none-eabi</p>
+</div>
+<div class="section" id="gcc-arm-none-eabi-debian-toolchain">
+<h4>gcc-arm-none-eabi Debian toolchain<a class="headerlink" href="#gcc-arm-none-eabi-debian-toolchain" title="Permalink to this headline">¶</a></h4>
+<p>Current Debian (jessie) and Ubuntu (14.04 trusty and later) releases have the gcc-arm-none-eabi package in the official repositories (universe), and can be installed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">update</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">gcc</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span> <span class="n">gdb</span><span class="o">-</span><span class="n">arm</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="n">eabi</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 

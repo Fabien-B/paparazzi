@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Experimental Flight" href="first_flight.html" />
-    <link rel="prev" title="Quick Install" href="install.html" /> 
+    <link rel="prev" title="Paparazzi Center" href="paparazzi_center_tour.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -89,14 +89,19 @@
               <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index_start.html">QuickStart</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="install.html">Quick Install</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Flight Simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paparazzi_center_tour.html">Paparazzi Center</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Flight Simulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#launch-the-simulation">Launch the simulation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-strip">The Strip</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="first_flight.html">Experimental Flight</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/index_tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide/index_user_guide.html">User Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developer_guide/index_developer.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index_tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../support/index_support.html">Support</a></li>
 </ul>
 
@@ -167,7 +172,32 @@
             
   <div class="section" id="flight-simulation">
 <h1>Flight Simulation<a class="headerlink" href="#flight-simulation" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
+<div class="section" id="launch-the-simulation">
+<h2>Launch the simulation<a class="headerlink" href="#launch-the-simulation" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>In the paparazzi center, select the <strong>Microjet</strong> aircraft in the <em>A/C</em> combobox of the configuration panel.</p></li>
+<li><p>Select the <strong>sim</strong> target, and click <em>Build</em>. This should build without errors in the console panel, and finish with “DONE”.</p></li>
+<li><p>Select the <strong>Simulation</strong> session in the execution panel, and click <em>Execute</em>.</p></li>
+</ul>
+<p>A new window opens, this is the GCS (Ground Control Station).</p>
+<img alt="../_images/gcs.png" src="../_images/gcs.png" />
+<p>The GCS layout can be changed, but in this layout there are 3 very important panels:</p>
+<ul class="simple">
+<li><p>the red one (left) is the strips panel. Each aircraft have its own strip, which display the state of the aircraft, and let you send commands.</p></li>
+<li><p>the green panel (top right) is the map. The default background is black. Click on the google earth icon (green circle) to load the tiles.</p></li>
+<li><p>the purple panel feature various widgets. The first of these describe the flight plan.</p></li>
+</ul>
+<p>Now, lets launch the drone:</p>
+<ul class="simple">
+<li><p>On the purple panel, you should see that the “Holding Point” block is highlighted. This is the current block. Wait few seconds if the current block is “Wait GPS” or “Geo init”.</p></li>
+<li><p>In the strip, click on the button in the blue circle. This is a shortcut button for the “Takeoff” block in the flight plan. You can also double click on the “Takeoff” block in the flight plan.</p></li>
+<li><p>In real life, we would now launch the drone. In simulation, there is a magic button to do so in the strip. Click on the button in the red circle.</p></li>
+</ul>
+<p>The drone should now move, and the current block will change to “Standby”.</p>
+</div>
+<div class="section" id="the-strip">
+<h2>The Strip<a class="headerlink" href="#the-strip" title="Permalink to this headline">¶</a></h2>
+</div>
 </div>
 
 
@@ -181,7 +211,7 @@
         <a href="first_flight.html" class="btn btn-neutral float-right" title="Experimental Flight" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="install.html" class="btn btn-neutral float-left" title="Quick Install" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="paparazzi_center_tour.html" class="btn btn-neutral float-left" title="Paparazzi Center" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
