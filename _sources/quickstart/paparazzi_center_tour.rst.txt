@@ -1,4 +1,4 @@
-.. quickstart main_quickstart paparazzi_center_tour
+.. quickstart paparazzi_center_tour
 
 =================
 Paparazzi Center
@@ -16,7 +16,9 @@ This panel is dedicated to the configuration of the aircrafts. You can change th
 
 The *id* field is the **uniq** identifier of the aircraft, between 0 and 255.
 
-An aircraft is composed of an airframe, a flight plan, some settings, a radio and a telemetry configuration file. These concepts are explained in the :doc:`../user_guide/index_user_guide`.
+An aircraft is composed of an airframe, a flight plan, some settings, a radio and a telemetry configuration file. These concepts are explained later.
+
+For now, remember that you can select other files by hitting the ``...`` button, or edit the current file with the ``Edit`` button.
 
 
 Building panel

@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Paparazzi Center" href="paparazzi_center_tour.html" />
-    <link rel="prev" title="QuickStart" href="index_start.html" /> 
+    <link rel="next" title="Overall System Overview" href="system_overview.html" />
+    <link rel="prev" title="Quick Start" href="index_quick_start.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -87,15 +87,20 @@
             
             
               <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="index_start.html">QuickStart</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Quick Install</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index_quick_start.html">Quick Start</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quick Install</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#first-lets-install-the-gnu-arm-embedded-toolchain">First, lets install the GNU Arm Embedded Toolchain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#then-install-paparazzi">Then install Paparazzi</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="system_overview.html">Overall System Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="paparazzi_center_tour.html">Paparazzi Center</a></li>
 <li class="toctree-l2"><a class="reference internal" href="first_simulation.html">Flight Simulation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="first_flight.html">Experimental Flight</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide/index_user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../developer_guide/index_developer.html">Developer Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index_tutorials.html">Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../support/index_support.html">Support</a></li>
@@ -145,7 +150,7 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index_start.html">QuickStart</a> &raquo;</li>
+          <li><a href="index_quick_start.html">Quick Start</a> &raquo;</li>
         
       <li>Quick Install</li>
     
@@ -170,11 +175,30 @@
 <h1>Quick Install<a class="headerlink" href="#quick-install" title="Permalink to this headline">¶</a></h1>
 <p>Paparazzi runs best on <strong>Ubuntu 16.04 or higher</strong>, so this quick installation guide is for Ubuntu users. I you have an other OS or if you want more detailled installation, see the <a class="reference internal" href="../installation/index_installation.html"><span class="doc">Installation</span></a> page.</p>
 <p>Open a terminal and execute each lines below. If one fails, ask for help on gitter.</p>
-<p>Add paparazzi repositories and install dependencies:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository -y ppa:paparazzi-uav/ppa
-sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
+<div class="section" id="first-lets-install-the-gnu-arm-embedded-toolchain">
+<h2>First, lets install the GNU Arm Embedded Toolchain<a class="headerlink" href="#first-lets-install-the-gnu-arm-embedded-toolchain" title="Permalink to this headline">¶</a></h2>
+<p><strong>If you have Ubuntu 20.04:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-is-python3
+wget https://developer.arm.com/-/media/Files/downloads/gnu-rm/9-2020q2/gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2
+sudo tar -xvf gcc-arm-none-eabi-9-2020-q2-update-x86_64-linux.tar.bz2 -C /usr/local
+sudo ln -s /usr/local/gcc-arm-none-eabi-7-2017-q4-major /usr/local/gcc-arm-none-eabi
+<span class="nb">echo</span> <span class="s2">&quot;export PATH=\&quot;\$PATH:/usr/local/gcc-arm-none-eabi/bin\&quot;&quot;</span> &gt;&gt; .bashrc
+<span class="nb">source</span> .bashrc
+</pre></div>
+</div>
+<p><strong>If you have Ubuntu 18.04 or lower:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
 sudo apt-get update
-sudo apt-get -f -y install paparazzi-dev paparazzi-jsbsim gcc-arm-embedded
+sudo apt-get -f -y install gcc-arm-embedded
+</pre></div>
+</div>
+</div>
+<div class="section" id="then-install-paparazzi">
+<h2>Then install Paparazzi<a class="headerlink" href="#then-install-paparazzi" title="Permalink to this headline">¶</a></h2>
+<p>Add paparazzi apt-repository and install dependencies:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository -y ppa:paparazzi-uav/ppa
+sudo apt-get update
+sudo apt-get -f -y install paparazzi-dev paparazzi-jsbsim
 </pre></div>
 </div>
 <p>Clone the repository:</p>
@@ -187,22 +211,23 @@ sudo udevadm control --reload-rules
 </pre></div>
 </div>
 <p><em>Optionnal:</em> checkout on a stable version:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b v5.16 upstream/v5.16
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git checkout -b v5.17 upstream/v5.17
 </pre></div>
 </div>
 <p>Get the submodules and build Paparazzi. This step might take a long time the first time you launch it:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make -j1
 </pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-j1</span></code> argument may not be necessary, but if you are not familiar with paparazzi, its safer to use it. However, it will make paparazzi build much slower.</p>
 </div>
 <p>Finally, launch Paparazzi with</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./paparazzi
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If it doesn’t work, the previous step might have failed. In that case, recompile with with <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">-j1</span></code>, then try again to launch Paparazzi.</p>
-</div>
 <p>If all went well the Paparazzi Center should now be running. Please continue to the next page for a guided tour.</p>
+</div>
 </div>
 
 
@@ -213,10 +238,10 @@ sudo udevadm control --reload-rules
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="paparazzi_center_tour.html" class="btn btn-neutral float-right" title="Paparazzi Center" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="system_overview.html" class="btn btn-neutral float-right" title="Overall System Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index_start.html" class="btn btn-neutral float-left" title="QuickStart" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index_quick_start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

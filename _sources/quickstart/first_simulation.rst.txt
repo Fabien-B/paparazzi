@@ -1,4 +1,4 @@
-.. quickstart main_quickstart first_simu
+.. quickstart first_simu
 
 ======================
 Flight Simulation

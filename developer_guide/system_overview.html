@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Detailed System Overview &mdash; PaparazziUAV _devel documentation</title>
+  <title>System Architecture &mdash; PaparazziUAV _devel documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Developer 2" href="developer2.html" />
+    <link rel="next" title="Communication" href="communication.html" />
     <link rel="prev" title="Developer Guide" href="index_developer.html" /> 
 </head>
 
@@ -87,12 +87,17 @@
             
             
               <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../quickstart/index_start.html">QuickStart</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index_quick_start.html">Quick Start</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide/index_user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index_developer.html">Developer Guide</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Detailed System Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="developer2.html">Developer 2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">System Architecture</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ground-architecture">Ground architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#airborne-architecture">Airborne architecture</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="communication.html">Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modules.html">Modules</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials/index_tutorials.html">Tutorials</a></li>
@@ -145,7 +150,7 @@
         
           <li><a href="index_developer.html">Developer Guide</a> &raquo;</li>
         
-      <li>Detailed System Overview</li>
+      <li>System Architecture</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,9 +169,36 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="detailed-system-overview">
-<h1>Detailed System Overview<a class="headerlink" href="#detailed-system-overview" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
+  <div class="section" id="system-architecture">
+<h1>System Architecture<a class="headerlink" href="#system-architecture" title="Permalink to this headline">¶</a></h1>
+<p>The typical configuration constitute of a standard laptop as ground station and one more more drones with a RC transmitter for each as safety link. The Command and Control link is made by a pair of modems on the ground and in the drones.</p>
+<img alt="../_images/general_arch.png" src="../_images/general_arch.png" />
+<div class="section" id="ground-architecture">
+<h2>Ground architecture<a class="headerlink" href="#ground-architecture" title="Permalink to this headline">¶</a></h2>
+<p>The Gound Control Station (GCS) constitute of multiples programs, communicating with each other by the software bus <a class="reference external" href="https://www.eei.cena.fr/products/ivy/">Ivy</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ivy is a simple protocol and a set of open-source (LGPL) libraries and programs that allows applications to broadcast information through text messages, with a subscription mechanism based on regular expressions.</p>
+</div>
+<img alt="../_images/agents_arch.png" src="../_images/agents_arch.png" />
+<p>The core Paparazzi programs are Link, which handle the communication with the drones, the Server, which maintain the state of all aircrafts, and the GCS, the user facing application to control the drones.</p>
+<p>Many other tools have been developed for various use case, they are available in the <em>Tools</em> menu of the paparazzi center. But more interresting: you can write your own tools that will interact with Paparazzi via the Ivy bus.</p>
+</div>
+<div class="section" id="airborne-architecture">
+<h2>Airborne architecture<a class="headerlink" href="#airborne-architecture" title="Permalink to this headline">¶</a></h2>
+<p>In the case of a fixedwing aircraft, the airborne top level architecture is divided in two processes: the <em>AP</em> (autopilot) process which does most of the job, and the <em>FBW</em> (Fly by Wire) process. FBW manages the radio receiver and control the servos. In the catastrophic event that the AP process crashes, the aircraft can still be controlled via the RC transmitter.</p>
+<p>For the rotorcraft, there is only one process called <em>Main</em>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is planned to make a failsafe process for rotorcraft that will allow basic stabilization and control of the drone.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>TODO: Explain airborne architecture</p>
+</div>
+<img alt="../_images/airborne_arch.png" src="../_images/airborne_arch.png" />
+<p>The aircraft is configured by various XML configuration files: <em>airframe</em>, <em>flight_plan</em>, <em>radio</em> and <em>telemetry</em>. theses will be covered in the <a class="reference internal" href="../user_guide/index_user_guide.html"><span class="doc">User Guide</span></a> section.</p>
+</div>
 </div>
 
 
@@ -177,7 +209,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="developer2.html" class="btn btn-neutral float-right" title="Developer 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="communication.html" class="btn btn-neutral float-right" title="Communication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index_developer.html" class="btn btn-neutral float-left" title="Developer Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
