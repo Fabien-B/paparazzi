@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Installation" href="../installation/index_installation.html" />
+    <link rel="next" title="Radio" href="radio.html" />
     <link rel="prev" title="Flight Plans" href="flight_plans.html" /> 
 </head>
 
@@ -89,6 +89,7 @@
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/index_quick_start.html">Quick Start</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index_user_guide.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="more_on_paparazzi_center.html">More on the Paparazzi Center</a></li>
 <li class="toctree-l2"><a class="reference internal" href="flight_plans.html">Flight Plans</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Communication</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#visualising-messages">Visualising messages</a><ul>
@@ -97,6 +98,8 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="radio.html">Radio</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directories_structure.html">Directories Structure</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
@@ -197,7 +200,7 @@
 <p>You can edit which messages are sent by the drone and at what rate. In the Paparazzi Center left pane, hit the telemetry <code class="docutils literal notranslate"><span class="pre">Edit</span></code> button. An XML file should open with a text editor.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If this text editor happends to be <em>vi</em> and you are not familiar with it, here is how to escape from it: hit Escape, then type <code class="docutils literal notranslate"><span class="pre">:q!</span></code>, then hit Enter. Change the default editor on your system with the <code class="docutils literal notranslate"><span class="pre">$EDITOR</span></code> environnement variable.</p>
+<p>If you want to change the default text editor, sets the <code class="docutils literal notranslate"><span class="pre">$EDITOR</span></code> environnement variable on your system. Paparazzi will use this editor.</p>
 </div>
 <p>Watch how the file is structured: there are <em>process</em> tags, inside which there are <em>mode</em> tags, inside which there are <em>message</em>. It matches what you seen in the GCS Telemetry settings. Don’t worry too much about processes right now, keep in mind that are are mostly interested about the <em>Ap</em> process at the moment.</p>
 <p>As an exercise, try to change the <em>period</em> of a message. This is the period in seconds at which this message will be sent by the drone. You can also add a message, picked from the telemetry message class.</p>
@@ -214,7 +217,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../installation/index_installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="radio.html" class="btn btn-neutral float-right" title="Radio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="flight_plans.html" class="btn btn-neutral float-left" title="Flight Plans" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

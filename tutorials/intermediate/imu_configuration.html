@@ -98,7 +98,6 @@
 <li class="toctree-l3"><a class="reference internal" href="create_radio.html">Create a new radio configuration</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">IMU Configuration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#accelerometer-configuration">Accelerometer configuration</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#accelerometer-calibration">Accelerometer calibration</a></li>
 </ul>
 </li>
 </ul>
@@ -195,73 +194,6 @@
 </pre></div>
 </div>
 </div></blockquote>
-<p><strong>Get the axis right !</strong></p>
-<p>The drone must know how your IMU is oriented.</p>
-<div class="figure align-center" id="id1">
-<img alt="Plane axis" src="../../_images/plane_axis.png" />
-<p class="caption"><span class="caption-text">Plane axis</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
-</div>
-</div>
-<div class="section" id="accelerometer-calibration">
-<h2>Accelerometer calibration<a class="headerlink" href="#accelerometer-calibration" title="Permalink to this headline">¶</a></h2>
-<p>Here is the procedure:</p>
-<ol class="arabic simple">
-<li><p>Flash the board with your normal AP firmware (if it is not already on it.)</p></li>
-<li><p>Switch to the “raw sensors” telemetry mode via GCS-&gt;Settings-&gt;Telemetry and launch “server” to record a log.</p></li>
-</ol>
-<div class="figure align-center" id="id2">
-<img alt="How to set raw sensors telemetry" src="../../_images/raw_sensors.jpg" />
-<p class="caption"><span class="caption-text">How to set raw sensors telemetry</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
-</div>
-<ol class="arabic simple" start="3">
-<li><p>Move your IMU/airframe into different positions to record relevant measurements for each axis.</p></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li><p>It is important that you get the min/max sensor values on each axis: turn and hold the IMU on all six sides of the ‘cube’ for about 10 seconds per IMU axis.</p></li>
-<li><p>During theses 10 seconds, the IMU must be absolutely static. Don’t hold it in your hands, you will introduce too much vibrations.</p></li>
-<li><p>Please note that we talk about the IMU axes here, and not the airframe axes.</p></li>
-</ul>
-</div></blockquote>
-<div class="figure align-center" id="id3">
-<img alt="Orientations during accelerometer calibration" src="../../_images/acc_calibration.jpg" />
-<p class="caption"><span class="caption-text">Orientations during accelerometer calibration</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
-</div>
-<ol class="arabic" start="4">
-<li><p>Stop the server so it will write the log file (to var/logs).</p></li>
-<li><p>Run the Python script on it to get your calibration coefficients and add them to your airframe file.</p>
-<blockquote>
-<div><ul>
-<li><p>run the script:</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sw/tools/calibration/calibrate.py</span> <span class="pre">-s</span> <span class="pre">ACCEL</span> <span class="pre">-p</span> <span class="pre">var/logs/YY_MM_DD__hh_mm_ss.data</span></code></p>
-</div></blockquote>
-</li>
-<li><p>If the log file contains logs from more than one aircraft, you will need to use the <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">&lt;ac_id&gt;</span></code> option, e.g :</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">sw/tools/calibration/calibrate.py</span> <span class="pre">-i</span> <span class="pre">50</span> <span class="pre">-s</span> <span class="pre">ACCEL</span> <span class="pre">-p</span> <span class="pre">var/logs/YY_MM_DD__hh_mm_ss.data</span></code></p>
-</div></blockquote>
-</li>
-<li><p>If you kept the <code class="docutils literal notranslate"><span class="pre">-p</span></code> option, the script will show the plots.</p></li>
-<li><p>Add (or replace) the output values from this script to the airframe file in the <cite>IMU</cite> section. For example:</p>
-<blockquote>
-<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_X_NEUTRAL&quot;</span> <span class="na">value=</span><span class="s">&quot;-40&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Y_NEUTRAL&quot;</span> <span class="na">value=</span><span class="s">&quot;32&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Z_NEUTRAL&quot;</span> <span class="na">value=</span><span class="s">&quot;-33&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_X_SENS&quot;</span> <span class="na">value=</span><span class="s">&quot;2.45746358482&quot;</span> <span class="na">integer=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Y_SENS&quot;</span> <span class="na">value=</span><span class="s">&quot;2.46030721866&quot;</span> <span class="na">integer=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
-  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Z_SENS&quot;</span> <span class="na">value=</span><span class="s">&quot;2.46583755829&quot;</span> <span class="na">integer=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
-  ...
-<span class="nt">&lt;/section&gt;</span>
-</pre></div>
-</div>
-</div></blockquote>
-</li>
-</ul>
-</div></blockquote>
-</li>
-</ol>
 </div>
 </div>
 

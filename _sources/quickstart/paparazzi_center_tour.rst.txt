@@ -39,11 +39,11 @@ If the selected target is not a simulator, you can choose how you want to flash 
 Execution and Running agents panels
 ====================================
 
-In the Execution panel, a combo box provide a set of predefined and user sessions (collections of programs).
+In the Execution panel, a combo box provides a set of sessions (collections of programs).
 
 The Simulation session runs a server, a GCS and a simulator for the aircraft selected in the configuration panel. Note that *sim* or *nps* target must have been built prior to the simulation.
 
-The launched programs can be stopped and restarted (Stop/Redo buttons).
+The launched programs can be stopped and restarted individually (Stop/Redo buttons). All programs can be stopped and removed from the list by the *Stop/Remove All Processes* button. A common mistake is to have multiple instances of the same program running. This button is very handy to use!
 
 
 Console panel

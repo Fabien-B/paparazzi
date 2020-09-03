@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="User Guide" href="../user_guide/index_user_guide.html" />
-    <link rel="prev" title="Flight Simulation" href="first_simulation.html" /> 
+    <link rel="prev" title="GCS" href="gcs_tour.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,7 +92,15 @@
 <li class="toctree-l2"><a class="reference internal" href="system_overview.html">Overall System Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="paparazzi_center_tour.html">Paparazzi Center</a></li>
 <li class="toctree-l2"><a class="reference internal" href="first_simulation.html">Flight Simulation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Experimental Flight</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gcs_tour.html">GCS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Experimental Flight</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-the-bebop-2-with-paparazzi">Using the Bebop 2 with Paparazzi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#making-the-changes-permanent">Making the changes permanent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#change-network-settings">Change network settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calibration">Calibration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connect-a-joystick">Connect a Joystick</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../user_guide/index_user_guide.html">User Guide</a></li>
@@ -169,7 +177,56 @@
             
   <div class="section" id="experimental-flight">
 <h1>Experimental Flight<a class="headerlink" href="#experimental-flight" title="Permalink to this headline">¶</a></h1>
-<p>Flying a Bebop2 …</p>
+<p>The easiest drone to fly with paparazzi is the <strong>Bebop 2</strong>, from Parrot. It is no longer produced but can still be found 2nd handed.</p>
+<div class="section" id="using-the-bebop-2-with-paparazzi">
+<h2>Using the Bebop 2 with Paparazzi<a class="headerlink" href="#using-the-bebop-2-with-paparazzi" title="Permalink to this headline">¶</a></h2>
+<p>Make sure to have a bebop with at least firmware v3.3.0. Update it from FreeFlight pro if needed.</p>
+<ul class="simple">
+<li><p>Start the Paparazzi Center (or Stop/remove all processes)</p></li>
+<li><p>Select the <em>bebop2</em> A/C and build it for the <em>ap</em> target</p></li>
+<li><p>Power up the Bebop</p></li>
+<li><p>Connect your laptop to the Bebop’s wifi network</p></li>
+<li><p>Press the on/off button 4 times</p></li>
+<li><p>Press the “Upload” button and wait. The messages in the console should end with “DONE”</p></li>
+<li><p>Select the Flight UDP/Wifi session, then execute.</p></li>
+</ul>
+<p>You should get the telemetry from the bebop.</p>
+</div>
+<div class="section" id="making-the-changes-permanent">
+<h2>Making the changes permanent<a class="headerlink" href="#making-the-changes-permanent" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the current state, you have to do the process all over again every time you restart the Bebop. Lets make it a permanent.</p>
+</div>
+<ul class="simple">
+<li><p>Power up the Bebop</p></li>
+<li><p>Connect your laptop to the Bebop’s wifi network</p></li>
+<li><p>Press the on/off button 4 times</p></li>
+<li><p>Open a terminal and go to <code class="docutils literal notranslate"><span class="pre">paparazzi/sw/tools/parrot</span></code></p></li>
+</ul>
+<p>Launch <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">status</span></code>. You should get the current status of the drone’s configuration. If it does not work, you may need to add to <code class="docutils literal notranslate"><span class="pre">--host</span></code> argument with the drone’s IP address like so: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">--host</span> <span class="pre">192.168.1.15</span> <span class="pre">status</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The default IP address of the bebop is <code class="docutils literal notranslate"><span class="pre">192.168.42.1</span></code>. In this case, you don’t need the <code class="docutils literal notranslate"><span class="pre">--host</span></code> argument.</p>
+</div>
+<p>Install the autostart script with <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">install_autostart</span></code>.</p>
+</div>
+<div class="section" id="change-network-settings">
+<h2>Change network settings<a class="headerlink" href="#change-network-settings" title="Permalink to this headline">¶</a></h2>
+<p>You can change the network settings of the drone to make it connect to an existing WiFi network via the subcommand <code class="docutils literal notranslate"><span class="pre">configure_network</span></code>: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">configure_network</span> <span class="pre">mySSID</span> <span class="pre">managed</span></code>.</p>
+</div>
+<div class="section" id="calibration">
+<h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h2>
+<p>The default values may be good enough to be able to fly, but it is recommanded that you calibrate the drone before you fly. Go the <a class="reference internal" href="../tutorials/beginner/sensor_calibration.html"><span class="doc">Sensor Calibration</span></a> page to learn how to do that.</p>
+</div>
+<div class="section" id="connect-a-joystick">
+<h2>Connect a Joystick<a class="headerlink" href="#connect-a-joystick" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This part is optionnal but it is recommended to connect a joystick to have an easy way to control your drone.</p>
+</div>
+<p>You can connect a joystick to your laptop to control your drone.</p>
+</div>
 </div>
 
 
@@ -183,7 +240,7 @@
         <a href="../user_guide/index_user_guide.html" class="btn btn-neutral float-right" title="User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="first_simulation.html" class="btn btn-neutral float-left" title="Flight Simulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="gcs_tour.html" class="btn btn-neutral float-left" title="GCS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

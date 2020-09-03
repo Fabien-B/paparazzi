@@ -42,7 +42,7 @@ You can edit which messages are sent by the drone and at what rate. In the Papar
 
 .. note::
     
-    If this text editor happends to be *vi* and you are not familiar with it, here is how to escape from it: hit Escape, then type ``:q!``, then hit Enter. Change the default editor on your system with the ``$EDITOR`` environnement variable.
+    If you want to change the default text editor, sets the ``$EDITOR`` environnement variable on your system. Paparazzi will use this editor.
 
 Watch how the file is structured: there are *process* tags, inside which there are *mode* tags, inside which there are *message*. It matches what you seen in the GCS Telemetry settings. Don't worry too much about processes right now, keep in mind that are are mostly interested about the *Ap* process at the moment.
 

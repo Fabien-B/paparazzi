@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Guide &mdash; PaparazziUAV _devel documentation</title>
+  <title>More on the Paparazzi Center &mdash; PaparazziUAV _devel documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="More on the Paparazzi Center" href="more_on_paparazzi_center.html" />
-    <link rel="prev" title="Experimental Flight" href="../quickstart/first_flight.html" /> 
+    <link rel="next" title="Flight Plans" href="flight_plans.html" />
+    <link rel="prev" title="User Guide" href="index_user_guide.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -88,8 +88,13 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../quickstart/index_quick_start.html">Quick Start</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="more_on_paparazzi_center.html">More on the Paparazzi Center</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index_user_guide.html">User Guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">More on the Paparazzi Center</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conf">Conf</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sessions-control-panel">Sessions &amp; Control panel</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="flight_plans.html">Flight Plans</a></li>
 <li class="toctree-l2"><a class="reference internal" href="communication.html">Communication</a></li>
 <li class="toctree-l2"><a class="reference internal" href="radio.html">Radio</a></li>
@@ -146,13 +151,15 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>User Guide</li>
+          <li><a href="index_user_guide.html">User Guide</a> &raquo;</li>
+        
+      <li>More on the Paparazzi Center</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/user_guide/index_user_guide.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/user_guide/more_on_paparazzi_center.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -165,38 +172,38 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="user-guide">
-<h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h1>
-<p>Welcome to the second level of the Paparazzi UAV user guide! It will explain how to configure Paparazzi to match your needs.</p>
-<p>Start conquering the wolrd, by making incredible <a class="reference internal" href="flight_plans.html"><span class="doc">Flight Plans</span></a>!</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="more_on_paparazzi_center.html">More on the Paparazzi Center</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="more_on_paparazzi_center.html#conf">Conf</a></li>
-<li class="toctree-l2"><a class="reference internal" href="more_on_paparazzi_center.html#tools">Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="more_on_paparazzi_center.html#sessions-control-panel">Sessions &amp; Control panel</a></li>
+  <div class="section" id="more-on-the-paparazzi-center">
+<h1>More on the Paparazzi Center<a class="headerlink" href="#more-on-the-paparazzi-center" title="Permalink to this headline">¶</a></h1>
+<p>The Paparazzi Center is configured by two files : the aircrafts configuration file and the control panel file.</p>
+<p>These files are located at <code class="docutils literal notranslate"><span class="pre">conf/conf.xml</span></code> and <code class="docutils literal notranslate"><span class="pre">conf/control_panel.xml</span></code>. To make configuration easier, these files are often symbolic links to actual files, usually located in <code class="docutils literal notranslate"><span class="pre">conf/userconf/</span></code>.</p>
+<div class="section" id="conf">
+<h2>Conf<a class="headerlink" href="#conf" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">conf.xml</span></code> contains the configuration of each aircrafts:</p>
+<ul class="simple">
+<li><p>Name</p></li>
+<li><p>Id</p></li>
+<li><p>airframe</p></li>
+<li><p>flight plan</p></li>
+<li><p>radio</p></li>
+<li><p>telemetry</p></li>
+<li><p>settings</p></li>
+<li><p>GUI color</p></li>
 </ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="flight_plans.html">Flight Plans</a></li>
-<li class="toctree-l1"><a class="reference internal" href="communication.html">Communication</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="communication.html#visualising-messages">Visualising messages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="communication.html#change-telemetry-messages-and-rates">Change telemetry messages and rates</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="radio.html">Radio</a></li>
-<li class="toctree-l1"><a class="reference internal" href="directories_structure.html">Directories Structure</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="directories_structure.html#aircraft">Aircraft</a></li>
-<li class="toctree-l2"><a class="reference internal" href="directories_structure.html#tools">Tools</a></li>
-<li class="toctree-l2"><a class="reference internal" href="directories_structure.html#modules">Modules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="directories_structure.html#software">Software</a></li>
-<li class="toctree-l2"><a class="reference internal" href="directories_structure.html#doc">Doc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="directories_structure.html#generated-files">Generated files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="directories_structure.html#launcher">Launcher</a></li>
-</ul>
-</li>
-</ul>
+<p>To hold you personnal confs, create a new file with this simple content in <em>conf/userconf/</em>, and use the <em>start.py</em> configuration utility to use it in Paparazzi :</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;conf&gt;</span>
+<span class="nt">&lt;/conf&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Tools</em> in the Paparazzi Center come from the <code class="docutils literal notranslate"><span class="pre">conf/tools</span></code> directory. Each xml file produce a new entry in the <em>Tools</em> menu. You can add you own tools by creating a new xml file in this directory, and restarting the Paparazzi Center.</p>
+<p>There are many tools that you will probably never use. You can remove these from the menu by adding their name to the <code class="docutils literal notranslate"><span class="pre">blacklisted</span></code> file.</p>
+</div>
+<div class="section" id="sessions-control-panel">
+<h2>Sessions &amp; Control panel<a class="headerlink" href="#sessions-control-panel" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">control_panel.xml</span></code> contains the sessions. A session is a set of programs with arguments.</p>
+<p>To define a new session, go to <em>Session-&gt;New</em> and give it a name. Start all the programs you want, with their correct arguments, then <em>Session-&gt;Save</em>.</p>
 </div>
 </div>
 
@@ -208,10 +215,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="more_on_paparazzi_center.html" class="btn btn-neutral float-right" title="More on the Paparazzi Center" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="flight_plans.html" class="btn btn-neutral float-right" title="Flight Plans" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../quickstart/first_flight.html" class="btn btn-neutral float-left" title="Experimental Flight" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index_user_guide.html" class="btn btn-neutral float-left" title="User Guide" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

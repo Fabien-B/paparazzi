@@ -17,5 +17,6 @@ To start, go to the :doc:`install` page!
     system_overview
     paparazzi_center_tour
     first_simulation
+    gcs_tour
     first_flight
     

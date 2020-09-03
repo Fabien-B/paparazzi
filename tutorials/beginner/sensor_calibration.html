@@ -98,7 +98,12 @@
 <li class="toctree-l3"><a class="reference internal" href="add_drones.html">Add Drones</a></li>
 <li class="toctree-l3"><a class="reference internal" href="flight_plan_setup.html">Flight Plan Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="testing_and_tuning.html">Testing and Tuning</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Sensor Calibration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Sensor Calibration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#accelerometer-calibration">Accelerometer calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#magnetometer-calibration">Magnetometer calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#imu-orientation">IMU orientation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../intermediate/index_intermediate.html">Intermediate</a></li>
@@ -178,7 +183,180 @@
             
   <div class="section" id="sensor-calibration">
 <h1>Sensor Calibration<a class="headerlink" href="#sensor-calibration" title="Permalink to this headline">¶</a></h1>
-<p>TBD</p>
+<p>The Accelerometers and magnetometers must be calibrated for the drone to fly correctly.</p>
+<p>Before you start, you can clear the log directory <em>paparazzi/var/logs</em>, it will simplify log file search process.</p>
+<div class="section" id="accelerometer-calibration">
+<h2>Accelerometer calibration<a class="headerlink" href="#accelerometer-calibration" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Flash the board with your normal AP firmware (if it is not already on it.)</p></li>
+<li><p>Switch to the “raw sensors” telemetry mode in the GCS via Settings-&gt;Telemetry and make sure that <em>Server</em> is running.</p></li>
+</ol>
+<div class="figure align-center" id="id1">
+<img alt="How to set raw sensors telemetry" src="../../_images/raw_sensors.jpg" />
+<p class="caption"><span class="caption-text">Set raw sensors telemetry mode</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Move your IMU/airframe into different positions to record relevant measurements for each IMU axis.</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>It is important that you get the min/max sensor values on each axis: turn and hold the IMU on all six sides of the ‘cube’ for about 10 seconds per IMU axis.</p></li>
+<li><p>During theses 10 seconds, the IMU must be absolutely static. Don’t hold it in your hands as you will introduce too much vibrations, prefer holding it on a wall.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We talk about the <strong>IMU axis</strong> here, not the drone’s axis. So be carrefull if IMU axis are not aligned with the drone’s axis.</p>
+</div>
+<div class="figure align-center" id="id2">
+<img alt="Orientations during accelerometer calibration" src="../../_images/acc_calibration.jpg" />
+<p class="caption"><span class="caption-text">Orientations during accelerometer calibration</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+<ol class="arabic" start="4">
+<li><p>Stop the server so it will write the log file (to var/logs).</p></li>
+<li><p>Run the Python script on it to get your calibration coefficients and add them to your airframe file:</p>
+<blockquote>
+<div><ul>
+<li><p>run the script:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sw/tools/calibration/calibrate.py</span> <span class="pre">-s</span> <span class="pre">ACCEL</span> <span class="pre">-p</span> <span class="pre">var/logs/YY_MM_DD__hh_mm_ss.data</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The calibration script needs scipy and matplotlib python libraries. If you don’t have these, install them with <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt</span> <span class="pre">install</span> <span class="pre">python3-scipy</span> <span class="pre">python3-matplotlib</span></code>.</p>
+</div>
+<ul>
+<li><p>If the log file contains logs from more than one aircraft, you will need to use the <code class="docutils literal notranslate"><span class="pre">-i</span> <span class="pre">&lt;ac_id&gt;</span></code> option, e.g :</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sw/tools/calibration/calibrate.py</span> <span class="pre">-i</span> <span class="pre">50</span> <span class="pre">-s</span> <span class="pre">ACCEL</span> <span class="pre">-p</span> <span class="pre">var/logs/YY_MM_DD__hh_mm_ss.data</span></code></p>
+</div></blockquote>
+</li>
+<li><p>If you kept the <code class="docutils literal notranslate"><span class="pre">-p</span></code> option, the script will show the plots.</p></li>
+<li><p>Add (or replace) the output values from this script to the airframe file in the <cite>IMU</cite> section. For example:</p>
+<blockquote>
+<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_X_NEUTRAL&quot;</span> <span class="na">value=</span><span class="s">&quot;-40&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Y_NEUTRAL&quot;</span> <span class="na">value=</span><span class="s">&quot;32&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Z_NEUTRAL&quot;</span> <span class="na">value=</span><span class="s">&quot;-33&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_X_SENS&quot;</span> <span class="na">value=</span><span class="s">&quot;2.45746358482&quot;</span> <span class="na">integer=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Y_SENS&quot;</span> <span class="na">value=</span><span class="s">&quot;2.46030721866&quot;</span> <span class="na">integer=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Z_SENS&quot;</span> <span class="na">value=</span><span class="s">&quot;2.46583755829&quot;</span> <span class="na">integer=</span><span class="s">&quot;16&quot;</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/section&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the accelerometer calibration, your autopilot board does not necessarily need to be in your drone’s airframe as it depends only on the specific accelerometer chip you have.</p>
+</div>
+</div>
+<div class="section" id="magnetometer-calibration">
+<h2>Magnetometer calibration<a class="headerlink" href="#magnetometer-calibration" title="Permalink to this headline">¶</a></h2>
+<p>The procedure is very much similar to accelerometer calibration with two differences:</p>
+<ul>
+<li><p>On step 3, Slowly spin your aircraft around all axes. Ideally you would spin it around all axes until you have densely covered the whole sphere with magnetometer measurements. (See figure below)</p></li>
+<li><p>On step 5, use the <code class="docutils literal notranslate"><span class="pre">MAG</span></code> argument:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sw/tools/calibration/calibrate.py</span> <span class="pre">-s</span> <span class="pre">MAG</span> <span class="pre">-p</span> <span class="pre">var/logs/YY_MM_DD__hh_mm_ss.data</span></code></p>
+</div></blockquote>
+</li>
+</ul>
+<div class="figure align-center" id="id3">
+<img alt="A good calibration dataset" src="../../_images/mag_calibration.png" />
+<p class="caption"><span class="caption-text">A good calibration set</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+<p>Copy the XML output in the <em>IMU</em> section of your airframe file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the magnetometer calibration, your autopilot board <strong>needs</strong> to be in your drone’s airframe as it depends on all interferences of the environment, like the wires around the magnetometer, the position of the battery, and maybe the position of saturn in the sky.</p>
+</div>
+</div>
+<div class="section" id="imu-orientation">
+<h2>IMU orientation<a class="headerlink" href="#imu-orientation" title="Permalink to this headline">¶</a></h2>
+<p>The drone must know how your IMU is oriented.</p>
+<p>The drone axis are defined like so:</p>
+<ul class="simple">
+<li><p>Z is vertical down, aligned with the gravity</p></li>
+<li><p>X is toward the front of the drone</p></li>
+<li><p>Y is to right of the drone</p></li>
+</ul>
+<div class="figure align-center" id="id4">
+<img alt="Plane axis" src="../../_images/plane_axis.png" />
+<p class="caption"><span class="caption-text">Drone axis</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+<p>According to how you mounted the autopilot board/IMU in the drone, the IMU axes are not necessarily aligned with the drone’s axes.</p>
+<p>Check if the axes are correct by watching the IMU_ACCEL message:</p>
+<ul class="simple">
+<li><p>Put your drone on its natural attitude. az value should be approx -10, ax and ay being around 0.</p></li>
+<li><p>Nose down ax is -10, ay and az are 0</p></li>
+<li><p>Right wing down, ay is -10, ax and az are 0</p></li>
+</ul>
+<p>If the signs are not correct (10 instead of -10), change it in the following lines :</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_X_SIGN&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Y_SIGN&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_Z_SIGN&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/section&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the axis are not correct (e.g. X and Y should be swaped), you can switch them, however this is driver dependent. Here is an example for the Apogee autopilot, where X and Y are swaped:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;APOGEE_CHAN_X&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;APOGEE_CHAN_Y&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;APOGEE_CHAN_Z&quot;</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/section&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>You have to do the same thing for the GYRO signs. It is very likely that you will use the same signs as the ACCEL signs.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;GYRO_P_SIGN&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;GYRO_Q_SIGN&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;GYRO_R_SIGN&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/section&gt;</span>
+</pre></div>
+</div>
+<p>To check gyro signs, watch the IMU_GYRO message:</p>
+<ul class="simple">
+<li><p>gp must be positive when banking to the right (gq and gr approx 0)</p></li>
+<li><p>gq must be positive when pitching up (gp and gr approx 0)</p></li>
+<li><p>gr must be positive when heading clockwise from top view (gq and gq approx 0)</p></li>
+</ul>
+<p>The resulting axes must form direct (right-handed) coordinates. That means that you will most probaly have a even number of changes: either two negative signs, or one negative sign and two axes swaped.</p>
+<p>Finally, flash the drone with your modifications, then check the PFD. put the drone down and wait for 20-40s. If it turn, you have a bad setting. Check the directions of pitch up, pitch down, and rolls. For each check, rotate the drone by approx 20 degrees and wait. If the PFD move back, you probably miss a negative sign.</p>
+<p>The IMU may not be perfectly aligned with the drone body. In this case, you can use the BODY_TO_IMU defines:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
+  ...
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;BODY_TO_IMU_PHI&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="na">unit=</span><span class="s">&quot;deg&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;BODY_TO_IMU_THETA&quot;</span> <span class="na">value=</span><span class="s">&quot;3.0&quot;</span> <span class="na">unit=</span><span class="s">&quot;deg&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;BODY_TO_IMU_PSI&quot;</span> <span class="na">value=</span><span class="s">&quot;0.&quot;</span> <span class="na">unit=</span><span class="s">&quot;deg&quot;</span><span class="nt">/&gt;</span>
+  ...
+<span class="nt">&lt;/section&gt;</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>PHI is the roll axis (around X)</p></li>
+<li><p>THETA is along the pitch axis (around Y)</p></li>
+<li><p>PSI is along the yaw axis (around Z)</p></li>
+</ul>
+<p>In the example above from a fixedwing, BODY_TO_IMU_THETA is set 3 degrees for the drone to be slightly pitching up.</p>
+</div>
 </div>
 
 

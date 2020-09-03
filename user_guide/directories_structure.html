@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Directories Structure &mdash; PaparazziUAV _devel documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation" href="../installation/index_installation.html" />
+    <link rel="prev" title="Radio" href="radio.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> PaparazziUAV
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../quickstart/index_quick_start.html">Quick Start</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index_user_guide.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="more_on_paparazzi_center.html">More on the Paparazzi Center</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flight_plans.html">Flight Plans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="communication.html">Communication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="radio.html">Radio</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Directories Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#aircraft">Aircraft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tools">Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modules">Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#software">Software</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#doc">Doc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generated-files">Generated files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launcher">Launcher</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index_installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer_guide/index_developer.html">Developer Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/index_tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../support/index_support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PaparazziUAV</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index_user_guide.html">User Guide</a> &raquo;</li>
+        
+      <li>Directories Structure</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/user_guide/directories_structure.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="directories-structure">
+<h1>Directories Structure<a class="headerlink" href="#directories-structure" title="Permalink to this headline">¶</a></h1>
+<p>This chapter explains how files and directory are structured in Paparazzi.</p>
+<p>Here is an extract of the Paparazzi tree:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>├── conf
+│   ├── airframes
+│   │   └── airframe.dtd
+│   ├── autopilot
+│   │   └── autopilot.dtd
+│   ├── conf.xml
+│   ├── control_panel.xml
+│   ├── flight_plans
+│   │   ├── basic.xml
+│   │   └── flight_plan.dtd
+│   ├── modules
+│   │   └── baro_bmp3.xml
+│   ├── radios
+│   │   └── FrSkyX9D.xml
+│   ├── settings
+│   │   ├── fixedwing_basic.xml
+│   │   └── settings.dtd
+│   ├── telemetry
+│   │   ├── default_fixedwing.xml
+│   │   ├── default_rotorcraft.xml
+│   │   └── telemetry.dtd
+│   ├── tools
+│   │   ├── blacklisted
+│   │   ├── gcs.xml
+│   │   └── messages.xml
+├── doc
+│   └── sphinx
+│       └── source
+├── Makefile
+├── paparazzi
+├── start.py
+├── sw
+│   ├── ext
+│   └── airborne
+│       ├── autopilot.c
+│       ├── autopilot.h
+│       └── modules
+│           ├── decawave
+│           ├── demo_module
+│           └── gps
+└── var
+    ├── aircrafts
+    │   └── Microjet
+    ├── logs
+    │   ├── 20_06_25__11_39_10.data
+    │   ├── 20_06_25__11_39_10.log
+    └── messages.xml
+</pre></div>
+</div>
+<p>From a user perspective, the <code class="docutils literal notranslate"><span class="pre">conf</span></code> directory is the most important.</p>
+<div class="section" id="aircraft">
+<h2>Aircraft<a class="headerlink" href="#aircraft" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">conf/airframes</span></code>, <code class="docutils literal notranslate"><span class="pre">conf/flight_plans</span></code>, <code class="docutils literal notranslate"><span class="pre">conf/radios</span></code> and <code class="docutils literal notranslate"><span class="pre">conf/telemetry</span></code> sub-directories must contain the corresponding files. You can add as many subdirectories as you want, but don’t forget to maintain the relative path to the associated <em>dtd</em> file.</p>
+<p>In this example tree for the <em>airframe</em> directory (located itself in the <code class="docutils literal notranslate"><span class="pre">conf</span></code> directory):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>airframe
+├── airframe.dtd
+├── examples
+│   └── microjet.xml
+└── nimp.xml
+</pre></div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">This is the first line of <code class="docutils literal notranslate"><span class="pre">nimp.xml</span></code>:</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE airframe SYSTEM &quot;airframe.dtd&quot;&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">This is the first line of <code class="docutils literal notranslate"><span class="pre">examples/microjet.xml</span></code>:</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE airframe SYSTEM &quot;../airframe.dtd&quot;&gt;</span>
+</pre></div>
+</div>
+</div>
+<p>Aircrafts configurations (stored in <code class="docutils literal notranslate"><span class="pre">conf</span></code> files), and control panel files should be located in the <code class="docutils literal notranslate"><span class="pre">userconf</span></code> directory.</p>
+</div>
+<div class="section" id="tools">
+<h2>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h2>
+<p>The <em>Tools</em> in the Paparazzi Center come from the <code class="docutils literal notranslate"><span class="pre">conf/tools</span></code> directory. Each xml file produce a new entry in the <em>Tools</em> menu. You can add you own tools by creating a new xml file in this directory, and restarting the Paparazzi Center.</p>
+<p>There are many tools that you will probably never use. You can remove these from the menu by adding their name to the <code class="docutils literal notranslate"><span class="pre">blacklisted</span></code> file.</p>
+</div>
+<div class="section" id="modules">
+<h2>Modules<a class="headerlink" href="#modules" title="Permalink to this headline">¶</a></h2>
+<p>Modules configuration files are located in the <code class="docutils literal notranslate"><span class="pre">conf/modules</span></code> directory. The actual code of the modules is located in <code class="docutils literal notranslate"><span class="pre">sw/airborne/modules</span></code>.</p>
+</div>
+<div class="section" id="software">
+<h2>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h2>
+<p>Paparazzi softwares are located in <code class="docutils literal notranslate"><span class="pre">sw</span></code>. Airborne code, that will run on the drone itself, is located in <code class="docutils literal notranslate"><span class="pre">sw/airborne</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sw/ext</span></code> contains external software dependencies.</p>
+</div>
+<div class="section" id="doc">
+<h2>Doc<a class="headerlink" href="#doc" title="Permalink to this headline">¶</a></h2>
+<p>This documentation is stored in the <code class="docutils literal notranslate"><span class="pre">doc/sphinx</span></code> directory. Feel free to improve it!</p>
+</div>
+<div class="section" id="generated-files">
+<h2>Generated files<a class="headerlink" href="#generated-files" title="Permalink to this headline">¶</a></h2>
+<p>Compiled and generated files are located in the <code class="docutils literal notranslate"><span class="pre">var</span></code> directory.</p>
+<p><code class="docutils literal notranslate"><span class="pre">var/aircrafts</span></code> contains the files generated by building your aircrafts.</p>
+<p><code class="docutils literal notranslate"><span class="pre">var/logs</span></code> contains the logs written by the <em>Server</em> from real flights as well as for simulations if you remove the <code class="docutils literal notranslate"><span class="pre">-n</span></code> option on the server during a simulation.</p>
+<p><code class="docutils literal notranslate"><span class="pre">var/messages.xml</span></code> list all PprzLink messages.</p>
+</div>
+<div class="section" id="launcher">
+<h2>Launcher<a class="headerlink" href="#launcher" title="Permalink to this headline">¶</a></h2>
+<p>You can launch Paparazzi  with the eponym executable file <code class="docutils literal notranslate"><span class="pre">paparazzi</span></code>, or via the configuration utility <code class="docutils literal notranslate"><span class="pre">start.py</span></code>. In the later case, you can choose what conf file and what control panel file you want to use.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../installation/index_installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="radio.html" class="btn btn-neutral float-left" title="Radio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Paparazzi UAV Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
