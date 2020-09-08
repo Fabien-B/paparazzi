@@ -11,7 +11,7 @@ This section will let you go throught a quick installation and a first use of Pa
 To start, go to the :doc:`install` page!
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 1
     
     install
     system_overview

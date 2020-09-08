@@ -93,6 +93,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../../developer_guide/index_developer.html">Developer Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index_tutorials.html">Tutorials</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index_beginner.html">Beginner</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="use_joystick.html">Use a Joystick</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gcs_setup.html">GCS Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="airframe_setup.html">Airframe Setup</a></li>
 <li class="toctree-l3"><a class="reference internal" href="add_drones.html">Add Drones</a></li>
@@ -295,11 +296,11 @@
 <p>According to how you mounted the autopilot board/IMU in the drone, the IMU axes are not necessarily aligned with the drone’s axes.</p>
 <p>Check if the axes are correct by watching the IMU_ACCEL message:</p>
 <ul class="simple">
-<li><p>Put your drone on its natural attitude. az value should be approx -10, ax and ay being around 0.</p></li>
-<li><p>Nose down ax is -10, ay and az are 0</p></li>
-<li><p>Right wing down, ay is -10, ax and az are 0</p></li>
+<li><p>Put your drone on its natural attitude. <strong>az</strong> value should be approx <strong>-10</strong>, <strong>ax</strong> and <strong>ay</strong> being around <strong>0</strong>.</p></li>
+<li><p>Nose down <strong>ax</strong> is <strong>-10</strong>, <strong>ay</strong> and <strong>az</strong> are <strong>0</strong></p></li>
+<li><p>Right wing down, <strong>ay</strong> is <strong>-10</strong>, <strong>ax</strong> and <strong>az</strong> are <strong>0</strong></p></li>
 </ul>
-<p>If the signs are not correct (10 instead of -10), change it in the following lines :</p>
+<p>If the signs are not correct (10 instead of -10), change them in the following lines :</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
   ...
   <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;ACCEL_X_SIGN&quot;</span> <span class="na">value=</span><span class="s">&quot;-1&quot;</span><span class="nt">/&gt;</span>
@@ -334,12 +335,16 @@
 </div>
 <p>To check gyro signs, watch the IMU_GYRO message:</p>
 <ul class="simple">
-<li><p>gp must be positive when banking to the right (gq and gr approx 0)</p></li>
-<li><p>gq must be positive when pitching up (gp and gr approx 0)</p></li>
-<li><p>gr must be positive when heading clockwise from top view (gq and gq approx 0)</p></li>
+<li><p><strong>gp</strong> must be positive when banking to the right (gq and gr approx 0)</p></li>
+<li><p><strong>gq</strong> must be positive when pitching up (gp and gr approx 0)</p></li>
+<li><p><strong>gr</strong> must be positive when heading clockwise from top view (gq and gq approx 0)</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The gyrometers measures rotation <strong>speeds</strong>, so if e.g. you bank the drone 45° right and stop, <strong>gp</strong> will increase, then come back to 0.</p>
+</div>
 <p>The resulting axes must form direct (right-handed) coordinates. That means that you will most probaly have a even number of changes: either two negative signs, or one negative sign and two axes swaped.</p>
-<p>Finally, flash the drone with your modifications, then check the PFD. put the drone down and wait for 20-40s. If it turn, you have a bad setting. Check the directions of pitch up, pitch down, and rolls. For each check, rotate the drone by approx 20 degrees and wait. If the PFD move back, you probably miss a negative sign.</p>
+<p>Finally, flash the drone with your modifications, then check the PFD. put the drone down and wait for 20-40s. If it turn, you have a bad setting. Then Check the directions of pitch up, pitch down, and rolls. For each check, rotate the drone by approx 20 degrees and wait. If the PFD move back, you probably miss a negative sign.</p>
 <p>The IMU may not be perfectly aligned with the drone body. In this case, you can use the BODY_TO_IMU defines:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;section</span> <span class="na">name=</span><span class="s">&quot;IMU&quot;</span> <span class="na">prefix=</span><span class="s">&quot;IMU_&quot;</span><span class="nt">&gt;</span>
   ...
@@ -355,7 +360,7 @@
 <li><p>THETA is along the pitch axis (around Y)</p></li>
 <li><p>PSI is along the yaw axis (around Z)</p></li>
 </ul>
-<p>In the example above from a fixedwing, BODY_TO_IMU_THETA is set 3 degrees for the drone to be slightly pitching up.</p>
+<p>In the example above from a fixedwing, BODY_TO_IMU_THETA is set to 3 degrees for the drone to be slightly pitching up.</p>
 </div>
 </div>
 

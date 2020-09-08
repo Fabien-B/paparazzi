@@ -184,10 +184,14 @@
 <p>The <em>id</em> field is the <strong>uniq</strong> identifier of the aircraft, between 0 and 255.</p>
 <p>An aircraft is composed of an airframe, a flight plan, some settings, a radio and a telemetry configuration file. These concepts are explained later.</p>
 <p>For now, remember that you can select other files by hitting the <code class="docutils literal notranslate"><span class="pre">...</span></code> button, or edit the current file with the <code class="docutils literal notranslate"><span class="pre">Edit</span></code> button.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Edit</span></code> button open the file with <em>gedit</em> by default. You can change it by setting the <code class="docutils literal notranslate"><span class="pre">EDITOR</span></code> environnement variable.</p>
+</div>
 </div>
 <div class="section" id="building-panel">
 <h2>Building panel<a class="headerlink" href="#building-panel" title="Permalink to this headline">¶</a></h2>
-<p>This panel lets you choose for wich target you want to build the firmware with the <strong>Target</strong> combobox. Build and clean the firmware with the <em>Build</em> and <em>Clean</em> buttons.</p>
+<p>This panel lets you choose for which target you want to build the firmware with the <strong>Target</strong> combobox. Build and clean the firmware with the <em>Build</em> and <em>Clean</em> buttons.</p>
 <p>Some usual targets are:</p>
 <ul class="simple">
 <li><p><strong>sim</strong>: The basic fixedwing simulator written in OCaml without IMU simulation or any sensor models (noise, bias, etc) and mainly intended to validate your flight plan logic.</p></li>
@@ -200,7 +204,7 @@
 <h2>Execution and Running agents panels<a class="headerlink" href="#execution-and-running-agents-panels" title="Permalink to this headline">¶</a></h2>
 <p>In the Execution panel, a combo box provides a set of sessions (collections of programs).</p>
 <p>The Simulation session runs a server, a GCS and a simulator for the aircraft selected in the configuration panel. Note that <em>sim</em> or <em>nps</em> target must have been built prior to the simulation.</p>
-<p>The launched programs can be stopped and restarted individually (Stop/Redo buttons). All programs can be stopped and removed from the list by the <em>Stop/Remove All Processes</em> button. A common mistake is to have multiple instances of the same program running. This button is very handy to use!</p>
+<p>The launched programs can be stopped and restarted individually (Stop/Redo buttons). All programs can be stopped and removed from the list at once by the <em>Stop/Remove All Processes</em> button. A common mistake is to have multiple instances of the same program running. This button is very handy to use!</p>
 </div>
 <div class="section" id="console-panel">
 <h2>Console panel<a class="headerlink" href="#console-panel" title="Permalink to this headline">¶</a></h2>

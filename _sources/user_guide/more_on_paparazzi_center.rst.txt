@@ -44,7 +44,7 @@ Sessions & Control panel
 
 To define a new session, go to *Session->New* and give it a name. Start all the programs you want, with their correct arguments, then *Session->Save*.
 
-.. deprecated::
+.. warning::
 
     This file used to hold the programs accessible in the *Tools* menu. This is now only supported for backward compatibility
 

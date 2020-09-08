@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>IMU Configuration &mdash; PaparazziUAV _devel documentation</title>
+  <title>Use a Joystick &mdash; PaparazziUAV _devel documentation</title>
   
 
   
@@ -36,8 +36,8 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Advanced" href="../advanced/index_advanced.html" />
-    <link rel="prev" title="Create a new radio configuration" href="create_radio.html" /> 
+    <link rel="next" title="GCS Setup" href="gcs_setup.html" />
+    <link rel="prev" title="Beginner" href="index_beginner.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -92,16 +92,17 @@
 <li class="toctree-l1"><a class="reference internal" href="../../installation/index_installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../developer_guide/index_developer.html">Developer Guide</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index_tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="../beginner/index_beginner.html">Beginner</a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="index_intermediate.html">Intermediate</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="write_module.html">Write a New Module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="create_radio.html">Create a new radio configuration</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">IMU Configuration</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#accelerometer-configuration">Accelerometer configuration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_beginner.html">Beginner</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Use a Joystick</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcs_setup.html">GCS Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="airframe_setup.html">Airframe Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="add_drones.html">Add Drones</a></li>
+<li class="toctree-l3"><a class="reference internal" href="flight_plan_setup.html">Flight Plan Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing_and_tuning.html">Testing and Tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sensor_calibration.html">Sensor Calibration</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/index_intermediate.html">Intermediate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../advanced/index_advanced.html">Advanced</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../interfacing_with_paparazzi.html">Interfacing with Paparazzi</a></li>
 </ul>
@@ -155,15 +156,15 @@
         
           <li><a href="../index_tutorials.html">Tutorials</a> &raquo;</li>
         
-          <li><a href="index_intermediate.html">Intermediate</a> &raquo;</li>
+          <li><a href="index_beginner.html">Beginner</a> &raquo;</li>
         
-      <li>IMU Configuration</li>
+      <li>Use a Joystick</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../../_sources/tutorials/intermediate/imu_configuration.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/tutorials/beginner/use_joystick.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -176,24 +177,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="imu-configuration">
-<h1>IMU Configuration<a class="headerlink" href="#imu-configuration" title="Permalink to this headline">¶</a></h1>
-<p>The IMU is used by the drone to get its attitude and its angular speed around its axis. It is composed of 3 accelerometers and 3 gyroscopes. Some chip also embbed 3 magnetometers. This device needs to be calibrated, and the drone needs to know how it is fixed to its frame.</p>
-<p>See <a class="reference external" href="http://wiki.paparazziuav.org/wiki/ImuCalibration">http://wiki.paparazziuav.org/wiki/ImuCalibration</a> for more details.</p>
-<p>The accelerometers and gyro calibration is relative to the physical device you have. The magneto calibration is relative to the physival device AND the environment, i.e. the drone itself (battery, GPS…).</p>
-<div class="section" id="accelerometer-configuration">
-<h2>Accelerometer configuration<a class="headerlink" href="#accelerometer-configuration" title="Permalink to this headline">¶</a></h2>
-<p><strong>Add the IMU module</strong></p>
-<p>In your airframe file in the <cite>firmware</cite> section, add the <cite>imu</cite> module corresponding to your hardware (Replace <cite>apogee</cite> in the example below.) :</p>
-<blockquote>
-<div><div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;firmware</span> <span class="na">name=</span><span class="s">&quot;fixedwing&quot;</span><span class="nt">&gt;</span>
-  ...
-  <span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&quot;imu&quot;</span> <span class="na">type=</span><span class="s">&quot;apogee&quot;</span><span class="nt">&gt;</span>
-  ...
-<span class="nt">&lt;/firmware&gt;</span>
-</pre></div>
+  <div class="section" id="use-a-joystick">
+<h1>Use a Joystick<a class="headerlink" href="#use-a-joystick" title="Permalink to this headline">¶</a></h1>
+<p>You can use a joystick to command your drone via the datalink if you don’t have an RC transmitter.</p>
+<p>Currently supported joysticks are listed in the <code class="docutils literal notranslate"><span class="pre">paparazzi/conf/joystick</span></code> directory.</p>
+<p>Learn how to configure a new joystick on this page: <a class="reference internal" href="../intermediate/create_joystick.html"><span class="doc">Create a new joystick configuration</span></a></p>
+<ul class="simple">
+<li><p>Open the airframe file of you aircraft and change the <em>radio_control</em> type to <em>datalink</em> : <code class="docutils literal notranslate"><span class="pre">&lt;module</span> <span class="pre">name=&quot;radio_control&quot;</span> <span class="pre">type=&quot;datalink&quot;/&gt;</span></code>. Build and upload to the drone.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For the first time you try it, remove the propeller blades from you drone : if your configuration is wrong, motors could start spinning and hurt you!</p>
 </div>
-</div></blockquote>
+<ul class="simple">
+<li><p>Start a session as usual for your drone</p></li>
+<li><p>Start the “Joystick” tool : Tools-&gt;Joystick, and stop the program (it might already be crashed because of a bad options)</p></li>
+<li><p>Edit the Joystick command : <code class="docutils literal notranslate"><span class="pre">/home/user/paparazzi/sw/ground_segment/joystick/input2ivy</span>&#160; <span class="pre">-ac</span> <span class="pre">AC_NAME</span> <span class="pre">JOYSTICK_CONFIG_FILE.xml</span></code>.</p></li>
+<li><p>Replace <strong>AC_NAME</strong> by the name of the aircraft (it is probably good as it takes the current A/C), and replace <strong>JOYSTICK_CONFIG_FILE</strong> by a filename from <code class="docutils literal notranslate"><span class="pre">paparazzi/conf/joystick</span></code>.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Initial sticks position is badly handled byt he program. It’s a good idea to move a bit all sticks to avoid bad surprises.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Save the programs as a new session to avoid doing that all over again every time!</p>
 </div>
 </div>
 
@@ -205,10 +213,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../advanced/index_advanced.html" class="btn btn-neutral float-right" title="Advanced" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gcs_setup.html" class="btn btn-neutral float-right" title="GCS Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="create_radio.html" class="btn btn-neutral float-left" title="Create a new radio configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index_beginner.html" class="btn btn-neutral float-left" title="Beginner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -1,0 +1,399 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Create a new joystick configuration &mdash; PaparazziUAV _devel documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Advanced" href="../advanced/index_advanced.html" />
+    <link rel="prev" title="Create a new radio configuration" href="create_radio.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> PaparazziUAV
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index_quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index_user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/index_installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_guide/index_developer.html">Developer Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../beginner/index_beginner.html">Beginner</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_intermediate.html">Intermediate</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="write_module.html">Write a New Module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="create_radio.html">Create a new radio configuration</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Create a new joystick configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#profile-a-joystick">Profile a joystick</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#calibration">Calibration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../advanced/index_advanced.html">Advanced</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../interfacing_with_paparazzi.html">Interfacing with Paparazzi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../support/index_support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PaparazziUAV</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index_tutorials.html">Tutorials</a> &raquo;</li>
+        
+          <li><a href="index_intermediate.html">Intermediate</a> &raquo;</li>
+        
+      <li>Create a new joystick configuration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tutorials/intermediate/create_joystick.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="create-a-new-joystick-configuration">
+<h1>Create a new joystick configuration<a class="headerlink" href="#create-a-new-joystick-configuration" title="Permalink to this headline">¶</a></h1>
+<p>New joystick configurations can be added in the <code class="docutils literal notranslate"><span class="pre">paparazzi/conf/joystick</span></code> directory.</p>
+<div class="section" id="profile-a-joystick">
+<h2>Profile a joystick<a class="headerlink" href="#profile-a-joystick" title="Permalink to this headline">¶</a></h2>
+<p>Test if your joystick is recognised: plug your joystick then run <code class="docutils literal notranslate"><span class="pre">dmesg</span></code>. The message is different for every device, but the last lines should look like these:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">49174.642275</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="n">new</span> <span class="n">low</span><span class="o">-</span><span class="n">speed</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">number</span> <span class="mi">8</span> <span class="n">using</span> <span class="n">xhci_hcd</span>
+<span class="p">[</span><span class="mf">49174.812307</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="n">New</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">found</span><span class="p">,</span> <span class="n">idVendor</span><span class="o">=</span><span class="mi">046</span><span class="n">d</span><span class="p">,</span> <span class="n">idProduct</span><span class="o">=</span><span class="n">c214</span><span class="p">,</span> <span class="n">bcdDevice</span><span class="o">=</span> <span class="mf">2.05</span>
+<span class="p">[</span><span class="mf">49174.812309</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="n">New</span> <span class="n">USB</span> <span class="n">device</span> <span class="n">strings</span><span class="p">:</span> <span class="n">Mfr</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">Product</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">SerialNumber</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">[</span><span class="mf">49174.812310</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="n">Product</span><span class="p">:</span> <span class="n">Logitech</span> <span class="n">Attack</span> <span class="mi">3</span>
+<span class="p">[</span><span class="mf">49174.812311</span><span class="p">]</span> <span class="n">usb</span> <span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span> <span class="n">Manufacturer</span><span class="p">:</span> <span class="n">Logitech</span>
+<span class="p">[</span><span class="mf">49174.823264</span><span class="p">]</span> <span class="nb">input</span><span class="p">:</span> <span class="n">Logitech</span> <span class="n">Logitech</span> <span class="n">Attack</span> <span class="mi">3</span> <span class="k">as</span> <span class="o">/</span><span class="n">devices</span><span class="o">/</span><span class="n">pci0000</span><span class="p">:</span><span class="mi">00</span><span class="o">/</span><span class="mi">0000</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">14.0</span><span class="o">/</span><span class="n">usb1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">1</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mf">1.0</span><span class="o">/</span><span class="mi">0003</span><span class="p">:</span><span class="mi">046</span><span class="n">D</span><span class="p">:</span><span class="n">C214</span><span class="o">.</span><span class="mi">000</span><span class="n">B</span><span class="o">/</span><span class="nb">input</span><span class="o">/</span><span class="n">input37</span>
+<span class="p">[</span><span class="mf">49174.823608</span><span class="p">]</span> <span class="n">hid</span><span class="o">-</span><span class="n">generic</span> <span class="mi">0003</span><span class="p">:</span><span class="mi">046</span><span class="n">D</span><span class="p">:</span><span class="n">C214</span><span class="o">.</span><span class="mi">000</span><span class="n">B</span><span class="p">:</span> <span class="nb">input</span><span class="p">,</span><span class="n">hidraw4</span><span class="p">:</span> <span class="n">USB</span> <span class="n">HID</span> <span class="n">v1</span><span class="o">.</span><span class="mi">10</span> <span class="n">Joystick</span> <span class="p">[</span><span class="n">Logitech</span> <span class="n">Logitech</span> <span class="n">Attack</span> <span class="mi">3</span><span class="p">]</span> <span class="n">on</span> <span class="n">usb</span><span class="o">-</span><span class="mi">0000</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">14.0</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">input0</span>
+</pre></div>
+</div>
+<p>Launch <code class="docutils literal notranslate"><span class="pre">./sw/ground_segment/joystick/test_stick</span></code>. It will display joystick informations, then print current status:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Available</span> <span class="n">button</span><span class="p">:</span> <span class="mi">5</span> <span class="p">(</span><span class="mh">0x5</span><span class="p">)</span>
+<span class="n">Available</span> <span class="n">hats</span><span class="p">:</span> <span class="mi">0</span> <span class="p">(</span><span class="mh">0x0</span><span class="p">)</span>
+<span class="n">Available</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">4</span> <span class="p">(</span><span class="mh">0x4</span><span class="p">)</span>
+<span class="n">Axis</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">32768</span><span class="p">,</span><span class="mi">32768</span><span class="p">]</span>
+<span class="n">Axis</span> <span class="mi">1</span> <span class="p">:</span> <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">32768</span><span class="p">,</span><span class="mi">32768</span><span class="p">]</span>
+<span class="n">Axis</span> <span class="mi">2</span> <span class="p">:</span> <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">32768</span><span class="p">,</span><span class="mi">32768</span><span class="p">]</span>
+<span class="n">Axis</span> <span class="mi">3</span> <span class="p">:</span> <span class="n">parameters</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">32768</span><span class="p">,</span><span class="mi">32768</span><span class="p">]</span>
+<span class="n">Input</span> <span class="n">device</span> <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Amazing Joystick&quot;</span> <span class="n">on</span> <span class="n">SDL</span> <span class="n">device</span> <span class="s2">&quot;0&quot;</span>
+<span class="n">buttons</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">hat</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">axes</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">buttons</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">hat</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">axes</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">buttons</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">hat</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">axes</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">buttons</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">hat</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">axes</span> <span class="mi">1</span> <span class="o">-</span><span class="mi">40</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">buttons</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">hat</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">axes</span> <span class="o">-</span><span class="mi">33</span> <span class="o">-</span><span class="mi">83</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="n">buttons</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">hat</span> <span class="mi">0</span> <span class="o">|</span> <span class="n">axes</span> <span class="o">-</span><span class="mi">101</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your joystick may need to be calibrated. Go to the <a class="reference internal" href="#calibration"><span class="std std-ref">Calibration</span></a> section below.</p>
+</div>
+<p>Create a new file for your joystick in the <code class="docutils literal notranslate"><span class="pre">paparazzi/conf/joystick</span></code> directory with the syntax of the following example:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;joystick&gt;</span>
+  <span class="nt">&lt;input&gt;</span>
+    <span class="nt">&lt;axis</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">name=</span><span class="s">&quot;roll&quot;</span>  <span class="na">deadband=</span><span class="s">&quot;10&quot;</span> <span class="na">limit=</span><span class="s">&quot;1.00&quot;</span> <span class="na">exponent=</span><span class="s">&quot;0.7&quot;</span> <span class="na">trim=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;axis</span> <span class="na">index=</span><span class="s">&quot;1&quot;</span> <span class="na">name=</span><span class="s">&quot;pitch&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;axis</span> <span class="na">index=</span><span class="s">&quot;2&quot;</span> <span class="na">name=</span><span class="s">&quot;yaw&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;axis</span> <span class="na">index=</span><span class="s">&quot;3&quot;</span> <span class="na">name=</span><span class="s">&quot;thrust&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">index=</span><span class="s">&quot;0&quot;</span> <span class="na">name=</span><span class="s">&quot;fire&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">index=</span><span class="s">&quot;1&quot;</span> <span class="na">name=</span><span class="s">&quot;top_center&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">index=</span><span class="s">&quot;2&quot;</span> <span class="na">name=</span><span class="s">&quot;top_left&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">index=</span><span class="s">&quot;3&quot;</span> <span class="na">name=</span><span class="s">&quot;top_right&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">index=</span><span class="s">&quot;4&quot;</span> <span class="na">name=</span><span class="s">&quot;far_left&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/input&gt;</span>
+
+  <span class="nt">&lt;variables&gt;</span>
+    <span class="nt">&lt;var</span> <span class="na">name=</span><span class="s">&quot;mode&quot;</span> <span class="na">default=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;set</span> <span class="na">var=</span><span class="s">&quot;mode&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span> <span class="na">on_event=</span><span class="s">&quot;top_left&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;set</span> <span class="na">var=</span><span class="s">&quot;mode&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span> <span class="na">on_event=</span><span class="s">&quot;top_center&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;set</span> <span class="na">var=</span><span class="s">&quot;mode&quot;</span> <span class="na">value=</span><span class="s">&quot;2&quot;</span> <span class="na">on_event=</span><span class="s">&quot;top_right&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/variables&gt;</span>
+
+  <span class="nt">&lt;messages</span> <span class="na">period=</span><span class="s">&quot;0.01&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;message</span> <span class="na">class=</span><span class="s">&quot;datalink&quot;</span> <span class="na">name=</span><span class="s">&quot;RC_4CH&quot;</span> <span class="na">send_always=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;mode&quot;</span>        <span class="na">value=</span><span class="s">&quot;mode&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;throttle&quot;</span>    <span class="na">value=</span><span class="s">&quot;Fit(-thrust,-127,127,0,127)&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;roll&quot;</span>        <span class="na">value=</span><span class="s">&quot;roll&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;yaw&quot;</span>         <span class="na">value=</span><span class="s">&quot;yaw&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;pitch&quot;</span>       <span class="na">value=</span><span class="s">&quot;pitch&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+
+
+    <span class="c">&lt;!-- resurrect throttle on fire button --&gt;</span>
+    <span class="nt">&lt;message</span> <span class="na">class=</span><span class="s">&quot;ground&quot;</span> <span class="na">name=</span><span class="s">&quot;DL_SETTING&quot;</span> <span class="na">on_event=</span><span class="s">&quot;fire&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;index&quot;</span> <span class="na">value=</span><span class="s">&quot;IndexOfSetting(&#39;autopilot.kill_throttle&#39;)&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;value&quot;</span> <span class="na">value=</span><span class="s">&quot;0&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+
+    <span class="c">&lt;!-- kill throttle on far_left button --&gt;</span>
+    <span class="nt">&lt;message</span> <span class="na">class=</span><span class="s">&quot;ground&quot;</span> <span class="na">name=</span><span class="s">&quot;DL_SETTING&quot;</span> <span class="na">on_event=</span><span class="s">&quot;far_left&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;index&quot;</span> <span class="na">value=</span><span class="s">&quot;IndexOfSetting(&#39;autopilot.kill_throttle&#39;)&quot;</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;value&quot;</span> <span class="na">value=</span><span class="s">&quot;1&quot;</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/message&gt;</span>
+
+  <span class="nt">&lt;/messages&gt;</span>
+
+<span class="nt">&lt;/joystick&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="inputs">
+<h3>Inputs<a class="headerlink" href="#inputs" title="Permalink to this headline">¶</a></h3>
+<p>Edit the <em>input</em> section according to your info given by <em>test_stick</em>. There are 3 kind of inputs :</p>
+<ul class="simple">
+<li><p><em>axis</em>: “analog” stick that range from a min to a max value,</p></li>
+<li><p><em>hat</em>: tiny stick or arrows that can have 8 directions (up, down, left, right, up-left, …),</p></li>
+<li><p><em>buttons</em>.</p></li>
+</ul>
+<p><em>name</em> and <em>index</em> attributes are mandatory for all.</p>
+<p>Axis has 4 optionnal attributes:</p>
+<ul class="simple">
+<li><p><em>deadband</em>: input values within the deadband output 0. Range in [0, 127].</p></li>
+<li><p><em>exponent</em>: gives precise control around center values, and greater speed at high values. Range in [0, 1.0]. 0 has no effect, 1.0 has maximum effect.</p></li>
+<li><p><em>limit</em>: limit the range of the output values, in percent. Range in [0, 1.0]. 1.0 has no effect.</p></li>
+<li><p><em>trim</em>: set offset in output values. Range in [-127, 127].</p></li>
+</ul>
+<p>These attributes are applied in that order :  deadband, exponent, limit, trim.</p>
+</div>
+<div class="section" id="variables">
+<h3>Variables<a class="headerlink" href="#variables" title="Permalink to this headline">¶</a></h3>
+<p>In the <em>variables</em> section, you can define integer variables with the <em>var</em> tag, with the <em>name</em> and <em>default</em> attributes. The <em>set</em> tag allows to set a value to a variable on an event. An event is the name of a button or a hat.</p>
+</div>
+<div class="section" id="messages">
+<h3>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h3>
+<p>The <em>period</em> attribute on the <em>messages</em> section is the period in seconds at which inputs will be checked.</p>
+<p>In this section, you define which messages will be sent, the value of each field, and the conditions required to send the message.</p>
+<p>The <em>message</em> tag has two required attributes: the <em>name</em> and <em>class</em> of the message, and two optionnal attributes : <em>send_always</em> and <em>on_event</em>.</p>
+<p><em>send_always</em> is a boolean that default to <em>false</em>. If set to <em>true</em>, messages will keep be sent at the <em>period</em> rate. If set to <em>false</em>, message will be sent only when one of its field change value.</p>
+<p><em>on_event</em> defines the event/condition required to send the message. Complexes conditions are evaluated. Here are some examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">on_event=&quot;button11</span> <span class="pre">||</span> <span class="pre">button10&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">on_event=&quot;(button11</span> <span class="pre">||</span> <span class="pre">button10)</span> <span class="pre">&amp;&amp;</span> <span class="pre">pitch</span> <span class="pre">&gt;</span> <span class="pre">100&quot;</span></code></p></li>
+</ul>
+<p>In the message node, all fields must be specified except the <em>ac_id</em> field, that is filled by <em>input2ivy</em>.</p>
+<p><em>value</em> is a “C like” expression made of axis and variables names, operators, and a set of utily functions.</p>
+<p>Thoses functions are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Scale(toto,</span> <span class="pre">min,</span> <span class="pre">max)</span></code> : scale toto from default min/max values [-128, 127] to [<em>min</em>, <em>max</em>]</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Fit(x,</span> <span class="pre">min_in,</span> <span class="pre">max_in,</span> <span class="pre">min_out,</span> <span class="pre">max_out)</span></code> : scale <em>x</em> from <em>min_in</em> <em>max_in</em> to <em>min_out</em>, <em>max_out</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Bound(x,</span> <span class="pre">min,</span> <span class="pre">max)</span></code> : bound x between <em>min</em> and <em>max</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PprzMode(x)</span></code> : scale input value to [0;1;2]. usefull for RC mode.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">JoystickID()</span></code> : return the joystick ID.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IndexOfEnum(NAME)</span></code> : return the index of the enum member <em>NAME</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IndexOfSetting('setting_name')</span></code> : return the index of the setting <em>setting_name</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">IndexOfBlock('block_name')</span></code> : return the index of the block <em>block_name</em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HatCentered(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatUp(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatRight(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatRightUp(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatDown(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatRightDown(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatLeft(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatLeftUp(hat_name)</span></code>, <code class="docutils literal notranslate"><span class="pre">HatLeftDown(hat_name)</span></code> : return 1 or 0.</p></li>
+</ul>
+<p>The operators are: <em>-</em>, <em>+</em>, <em>*</em>, <em>%</em>, <em>&amp;&amp;</em>, <em>||</em>, <em>&lt;</em>, <em>&gt;</em></p>
+<p>Some examples:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">value=&quot;roll&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value=&quot;(right-left)*127&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value=&quot;IndexOfSetting('autopilot.kill_throttle')&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value=&quot;Fit(-thrust,-127,127,0,127)&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value=&quot;IndexOfBlock('land</span> <span class="pre">here')&quot;</span></code></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="calibration">
+<span id="id1"></span><h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h2>
+<p>Your joystick may need calibration. Uncalibrated joystick may send non-zero values when the sticks are in neutral position.</p>
+<p>Install the joystick and the jstest-gtk packages via:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">joystick</span> <span class="pre">jstest-gtk</span></code></p>
+</div></blockquote>
+<p>Use the graphical jstest-gtk tool (or the commandline jstest) to view/edit your joystick calibration and axis/button mappings. Start it via:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">jstest-gtk</span></code></p>
+</div></blockquote>
+<p><strong>Store the calibration</strong></p>
+<p>Your calibration and mapping will be lost once you unplug the joystick, so store your configuration via:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">jscal-store</span> <span class="pre">/dev/input/js0</span></code></p>
+</div></blockquote>
+<p>If you replug your joystick the next time, udev should take care of automatically loading the appropriate configuration.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../advanced/index_advanced.html" class="btn btn-neutral float-right" title="Advanced" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="create_radio.html" class="btn btn-neutral float-left" title="Create a new radio configuration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Paparazzi UAV Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

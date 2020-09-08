@@ -1,4 +1,4 @@
-.. tutorials main_tutorials beginner sensor_calibration
+.. tutorials beginner sensor_calibration
 
 ======================
 Sensor Calibration
@@ -113,11 +113,11 @@ According to how you mounted the autopilot board/IMU in the drone, the IMU axes 
 
 Check if the axes are correct by watching the IMU_ACCEL message:
 
-- Put your drone on its natural attitude. az value should be approx -10, ax and ay being around 0.
-- Nose down ax is -10, ay and az are 0
-- Right wing down, ay is -10, ax and az are 0
+- Put your drone on its natural attitude. **az** value should be approx **-10**, **ax** and **ay** being around **0**.
+- Nose down **ax** is **-10**, **ay** and **az** are **0**
+- Right wing down, **ay** is **-10**, **ax** and **az** are **0**
 
-If the signs are not correct (10 instead of -10), change it in the following lines :
+If the signs are not correct (10 instead of -10), change them in the following lines :
 
 .. code-block:: xml
 
@@ -159,14 +159,17 @@ You have to do the same thing for the GYRO signs. It is very likely that you wil
 
 To check gyro signs, watch the IMU_GYRO message:
 
-- gp must be positive when banking to the right (gq and gr approx 0)
-- gq must be positive when pitching up (gp and gr approx 0)
-- gr must be positive when heading clockwise from top view (gq and gq approx 0)
+- **gp** must be positive when banking to the right (gq and gr approx 0)
+- **gq** must be positive when pitching up (gp and gr approx 0)
+- **gr** must be positive when heading clockwise from top view (gq and gq approx 0)
 
+.. note::
+
+    The gyrometers measures rotation **speeds**, so if e.g. you bank the drone 45° right and stop, **gp** will increase, then come back to 0.
 
 The resulting axes must form direct (right-handed) coordinates. That means that you will most probaly have a even number of changes: either two negative signs, or one negative sign and two axes swaped.
 
-Finally, flash the drone with your modifications, then check the PFD. put the drone down and wait for 20-40s. If it turn, you have a bad setting. Check the directions of pitch up, pitch down, and rolls. For each check, rotate the drone by approx 20 degrees and wait. If the PFD move back, you probably miss a negative sign.
+Finally, flash the drone with your modifications, then check the PFD. put the drone down and wait for 20-40s. If it turn, you have a bad setting. Then Check the directions of pitch up, pitch down, and rolls. For each check, rotate the drone by approx 20 degrees and wait. If the PFD move back, you probably miss a negative sign.
 
 
 The IMU may not be perfectly aligned with the drone body. In this case, you can use the BODY_TO_IMU defines:
@@ -185,6 +188,6 @@ The IMU may not be perfectly aligned with the drone body. In this case, you can 
 - THETA is along the pitch axis (around Y)
 - PSI is along the yaw axis (around Z)
 
-In the example above from a fixedwing, BODY_TO_IMU_THETA is set 3 degrees for the drone to be slightly pitching up. 
+In the example above from a fixedwing, BODY_TO_IMU_THETA is set to 3 degrees for the drone to be slightly pitching up. 
 
 

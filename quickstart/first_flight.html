@@ -194,17 +194,14 @@
 </div>
 <div class="section" id="making-the-changes-permanent">
 <h2>Making the changes permanent<a class="headerlink" href="#making-the-changes-permanent" title="Permalink to this headline">¶</a></h2>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the current state, you have to do the process all over again every time you restart the Bebop. Lets make it a permanent.</p>
-</div>
+<p>In the current state, you have to do the process all over again every time you restart the Bebop. We can use paparazzi by default.</p>
 <ul class="simple">
 <li><p>Power up the Bebop</p></li>
 <li><p>Connect your laptop to the Bebop’s wifi network</p></li>
 <li><p>Press the on/off button 4 times</p></li>
 <li><p>Open a terminal and go to <code class="docutils literal notranslate"><span class="pre">paparazzi/sw/tools/parrot</span></code></p></li>
 </ul>
-<p>Launch <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">status</span></code>. You should get the current status of the drone’s configuration. If it does not work, you may need to add to <code class="docutils literal notranslate"><span class="pre">--host</span></code> argument with the drone’s IP address like so: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">--host</span> <span class="pre">192.168.1.15</span> <span class="pre">status</span></code>.</p>
+<p>Launch <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">status</span></code>. You should get the current status of the drone’s configuration. If it does not work, you may need to add the <code class="docutils literal notranslate"><span class="pre">--host</span></code> argument with the drone’s IP address like so: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">--host</span> <span class="pre">192.168.1.15</span> <span class="pre">status</span></code>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The default IP address of the bebop is <code class="docutils literal notranslate"><span class="pre">192.168.42.1</span></code>. In this case, you don’t need the <code class="docutils literal notranslate"><span class="pre">--host</span></code> argument.</p>
@@ -213,7 +210,7 @@
 </div>
 <div class="section" id="change-network-settings">
 <h2>Change network settings<a class="headerlink" href="#change-network-settings" title="Permalink to this headline">¶</a></h2>
-<p>You can change the network settings of the drone to make it connect to an existing WiFi network via the subcommand <code class="docutils literal notranslate"><span class="pre">configure_network</span></code>: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">configure_network</span> <span class="pre">mySSID</span> <span class="pre">managed</span></code>.</p>
+<p>You can change the network settings of the drone to make it connect to an existing WiFi network: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">configure_network</span> <span class="pre">mySSID</span> <span class="pre">managed</span></code>.</p>
 </div>
 <div class="section" id="calibration">
 <h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h2>
@@ -223,9 +220,9 @@
 <h2>Connect a Joystick<a class="headerlink" href="#connect-a-joystick" title="Permalink to this headline">¶</a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This part is optionnal but it is recommended to connect a joystick to have an easy way to control your drone.</p>
+<p>This part is optionnal but it is recommended to connect a joystick to have an easy way to control your drone, if something unexpected should happen.</p>
 </div>
-<p>You can connect a joystick to your laptop to control your drone.</p>
+<p>Learn how to connect a joystick to your laptop to control your drone on this page: <a class="reference internal" href="../tutorials/beginner/use_joystick.html"><span class="doc">Use a Joystick</span></a></p>
 </div>
 </div>
 
