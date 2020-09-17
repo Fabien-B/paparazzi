@@ -213,13 +213,17 @@
 ├── start.py
 ├── sw
 │   ├── ext
-│   └── airborne
-│       ├── autopilot.c
-│       ├── autopilot.h
-│       └── modules
-│           ├── decawave
-│           ├── demo_module
-│           └── gps
+│   ├── airborne
+│   │   ├── autopilot.c
+│   │   ├── autopilot.h
+│   │   └── modules
+│   │       ├── decawave
+│   │       ├── demo_module
+│   │       └── gps
+│   ├── ground_segment
+│   │   ├── tmtc
+│   │   └── cockpit
+│   └── simulator
 └── var
     ├── aircrafts
     │   └── Microjet
@@ -267,7 +271,12 @@
 <div class="section" id="software">
 <h2>Software<a class="headerlink" href="#software" title="Permalink to this headline">¶</a></h2>
 <p>Paparazzi softwares are located in <code class="docutils literal notranslate"><span class="pre">sw</span></code>. Airborne code, that will run on the drone itself, is located in <code class="docutils literal notranslate"><span class="pre">sw/airborne</span></code>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">sw/ext</span></code> contains external software dependencies.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">sw/ext</span></code> contains external software dependencies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sw/simulator</span></code> contains the simulators</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sw/ground_segment/tmtc</span></code> contains ????????????</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sw/ground_segment/cockpit</span></code> contains the GCS code</p></li>
+</ul>
 </div>
 <div class="section" id="doc">
 <h2>Doc<a class="headerlink" href="#doc" title="Permalink to this headline">¶</a></h2>

@@ -177,7 +177,7 @@
             
   <div class="section" id="experimental-flight">
 <h1>Experimental Flight<a class="headerlink" href="#experimental-flight" title="Permalink to this headline">¶</a></h1>
-<p>The easiest drone to fly with paparazzi is the <strong>Bebop 2</strong>, from Parrot. It is no longer produced but can still be found 2nd handed.</p>
+<p>The easiest drone to fly with paparazzi is the <strong>Bebop 2</strong>, from Parrot. It is no longer produced but can still be found 2nd hand.</p>
 <div class="section" id="using-the-bebop-2-with-paparazzi">
 <h2>Using the Bebop 2 with Paparazzi<a class="headerlink" href="#using-the-bebop-2-with-paparazzi" title="Permalink to this headline">¶</a></h2>
 <p>Make sure to have a bebop with at least firmware v3.3.0. Update it from FreeFlight pro if needed.</p>
@@ -194,7 +194,7 @@
 </div>
 <div class="section" id="making-the-changes-permanent">
 <h2>Making the changes permanent<a class="headerlink" href="#making-the-changes-permanent" title="Permalink to this headline">¶</a></h2>
-<p>In the current state, you have to do the process all over again every time you restart the Bebop. We can use paparazzi by default.</p>
+<p>In the current state, you have to do the process all over again every time you restart the Bebop. However, you can start Paparazzi by default with the following steps:</p>
 <ul class="simple">
 <li><p>Power up the Bebop</p></li>
 <li><p>Connect your laptop to the Bebop’s wifi network</p></li>
@@ -210,11 +210,11 @@
 </div>
 <div class="section" id="change-network-settings">
 <h2>Change network settings<a class="headerlink" href="#change-network-settings" title="Permalink to this headline">¶</a></h2>
-<p>You can change the network settings of the drone to make it connect to an existing WiFi network: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">configure_network</span> <span class="pre">mySSID</span> <span class="pre">managed</span></code>.</p>
+<p>You can change the network settings of the drone to make it connect to an existing WiFi network: <code class="docutils literal notranslate"><span class="pre">./bebop.py</span> <span class="pre">configure_network</span> <span class="pre">mySSID</span> <span class="pre">managed</span> <span class="pre">dhcp</span></code>. You can replace <code class="docutils literal notranslate"><span class="pre">dhcp</span></code> by a fixed IP address to use static IP instead of getting the address from your external router DHCP in <code class="docutils literal notranslate"><span class="pre">managed</span></code> mode.</p>
 </div>
 <div class="section" id="calibration">
 <h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h2>
-<p>The default values may be good enough to be able to fly, but it is recommanded that you calibrate the drone before you fly. Go the <a class="reference internal" href="../tutorials/beginner/sensor_calibration.html"><span class="doc">Sensor Calibration</span></a> page to learn how to do that.</p>
+<p>The default values may be good enough to be able to fly, but it is recommanded that you calibrate the drone before flying. Go to the <a class="reference internal" href="../tutorials/beginner/sensor_calibration.html"><span class="doc">Sensor Calibration</span></a> page to learn how to do that.</p>
 </div>
 <div class="section" id="connect-a-joystick">
 <h2>Connect a Joystick<a class="headerlink" href="#connect-a-joystick" title="Permalink to this headline">¶</a></h2>

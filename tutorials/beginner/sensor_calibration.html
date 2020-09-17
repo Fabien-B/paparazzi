@@ -185,12 +185,11 @@
   <div class="section" id="sensor-calibration">
 <h1>Sensor Calibration<a class="headerlink" href="#sensor-calibration" title="Permalink to this headline">¶</a></h1>
 <p>The Accelerometers and magnetometers must be calibrated for the drone to fly correctly.</p>
-<p>Before you start, you can clear the log directory <em>paparazzi/var/logs</em>, it will simplify log file search process.</p>
 <div class="section" id="accelerometer-calibration">
 <h2>Accelerometer calibration<a class="headerlink" href="#accelerometer-calibration" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Flash the board with your normal AP firmware (if it is not already on it.)</p></li>
-<li><p>Switch to the “raw sensors” telemetry mode in the GCS via Settings-&gt;Telemetry and make sure that <em>Server</em> is running.</p></li>
+<li><p>Switch to the “raw sensors” telemetry mode in the GCS via Settings-&gt;Telemetry and make sure that <em>Server</em> is running without the <code class="docutils literal notranslate"><span class="pre">-n</span></code> option.</p></li>
 </ol>
 <div class="figure align-center" id="id1">
 <img alt="How to set raw sensors telemetry" src="../../_images/raw_sensors.jpg" />

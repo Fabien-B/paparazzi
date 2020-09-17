@@ -171,18 +171,18 @@
             
   <div class="section" id="system-architecture">
 <h1>System Architecture<a class="headerlink" href="#system-architecture" title="Permalink to this headline">¶</a></h1>
-<p>The typical configuration constitute of a standard laptop as ground station and one more more drones with a RC transmitter for each as safety link. The Command and Control link is made by a pair of modems on the ground and in the drones.</p>
+<p>The typical configuration constitute of a standard laptop as ground station and one or more drones, possibly with a RC transmitter for each as safety link. The Command and Control link is made by a pair of modems on the ground and in the drones.</p>
 <img alt="../_images/general_arch.png" src="../_images/general_arch.png" />
 <div class="section" id="ground-architecture">
 <h2>Ground architecture<a class="headerlink" href="#ground-architecture" title="Permalink to this headline">¶</a></h2>
-<p>The Gound Control Station (GCS) constitute of multiples programs, communicating with each other by the software bus <a class="reference external" href="https://www.eei.cena.fr/products/ivy/">Ivy</a>.</p>
+<p>The Gound Control Station (GCS) constits of multiples programs, communicating with each other by the software bus <a class="reference external" href="https://www.eei.cena.fr/products/ivy/">Ivy</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Ivy is a simple protocol and a set of open-source (LGPL) libraries and programs that allows applications to broadcast information through text messages, with a subscription mechanism based on regular expressions.</p>
+<p>Ivy is a simple protocol and a set of open-source (LGPL) libraries and programs that allows applications to broadcast information through text messages, with a publisher / subscriber mechanism based on regular expressions.</p>
 </div>
 <img alt="../_images/agents_arch.png" src="../_images/agents_arch.png" />
 <p>The core Paparazzi programs are Link, which handle the communication with the drones, the Server, which maintain the state of all aircrafts, and the GCS, the user facing application to control the drones.</p>
-<p>Many other tools have been developed for various use case, they are available in the <em>Tools</em> menu of the paparazzi center. But more interresting: you can write your own tools that will interact with Paparazzi via the Ivy bus.</p>
+<p>Many other tools have been developed for various use cases, they are available in the <em>Tools</em> menu of the paparazzi center. But more interesting: you can write your own tools that will interact with Paparazzi via the Ivy bus.</p>
 </div>
 <div class="section" id="airborne-architecture">
 <h2>Airborne architecture<a class="headerlink" href="#airborne-architecture" title="Permalink to this headline">¶</a></h2>
