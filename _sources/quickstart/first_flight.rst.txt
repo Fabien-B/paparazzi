@@ -1,8 +1,8 @@
 .. quickstart first_flight
 
-===========================
-Experimental Flight TEEEEST
-===========================
+======================
+Experimental Flight
+======================
 
 The easiest drone to fly with paparazzi is the **Bebop 2**, from Parrot. It is no longer produced but can still be found 2nd hand.
 
