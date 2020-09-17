@@ -192,12 +192,14 @@
 <ul class="simple">
 <li><p>Start a session as usual for your drone</p></li>
 <li><p>Start the “Joystick” tool : Tools-&gt;Joystick, and stop the program (it might already be crashed because of a bad options)</p></li>
-<li><p>Edit the Joystick command : <code class="docutils literal notranslate"><span class="pre">/home/user/paparazzi/sw/ground_segment/joystick/input2ivy</span>&#160; <span class="pre">-ac</span> <span class="pre">AC_NAME</span> <span class="pre">JOYSTICK_CONFIG_FILE.xml</span></code>.</p></li>
+<li><p>Edit the Joystick command : <code class="docutils literal notranslate"><span class="pre">$PAPARAZZI_SRC/sw/ground_segment/joystick/input2ivy</span>&#160; <span class="pre">-ac</span> <span class="pre">AC_NAME</span> <span class="pre">JOYSTICK_CONFIG_FILE.xml</span></code>.</p></li>
 <li><p>Replace <strong>AC_NAME</strong> by the name of the aircraft (it is probably good as it takes the current A/C), and replace <strong>JOYSTICK_CONFIG_FILE</strong> by a filename from <code class="docutils literal notranslate"><span class="pre">paparazzi/conf/joystick</span></code>.</p></li>
 </ul>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>Initial sticks position is badly handled byt he program. It’s a good idea to move a bit all sticks to avoid bad surprises.</p>
+<p>Initial sticks positions default to middle position until the axis has been moved. Move all axis to avoid bad surprises.</p>
+<p>You can also use the <code class="docutils literal notranslate"><span class="pre">-c</span></code> option (c meaning <em>check</em>) to prevent sending messages with bad values. Messages will start beeing sent only when all axis received events.</p>
+<p><code class="docutils literal notranslate"><span class="pre">$PAPARAZZI_SRC/sw/ground_segment/joystick/input2ivy</span> <span class="pre">-ac</span> <span class="pre">AC_NAME</span> <span class="pre">JOYSTICK_CONFIG_FILE.xml</span> <span class="pre">-c</span></code></p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
