@@ -179,11 +179,12 @@
 <div class="section" id="version-specific-prerequisites">
 <h2>Version specific prerequisites<a class="headerlink" href="#version-specific-prerequisites" title="Permalink to this headline">¶</a></h2>
 <p><strong>If you have Ubuntu 20.04:</strong></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-is-python3 gdb-multiarch
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo apt-get install python-is-python3 gcc-arm-none-eabi gdb-multiarch
 </pre></div>
 </div>
 <p><strong>If you have Ubuntu 18.04 or lower:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository -y ppa:team-gcc-arm-embedded/ppa
+sudo apt-get install gcc-arm-embedded
 sudo apt-get update
 </pre></div>
 </div>
@@ -193,7 +194,7 @@ sudo apt-get update
 <p>Add paparazzi apt-repository and install dependencies:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo add-apt-repository -y ppa:paparazzi-uav/ppa
 sudo apt-get update
-sudo apt-get -f -y install paparazzi-dev paparazzi-jsbsim gcc-arm-embedded
+sudo apt-get -f -y install paparazzi-dev paparazzi-jsbsim dfu-util
 </pre></div>
 </div>
 <p>Clone the repository:</p>
