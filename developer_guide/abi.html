@@ -204,6 +204,7 @@
  <span class="nt">&lt;message</span> <span class="na">name=</span><span class="s">&quot;DATA&quot;</span> <span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;a&quot;</span> <span class="na">type=</span><span class="s">&quot;float&quot;</span><span class="nt">/&gt;</span>
   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;b&quot;</span> <span class="na">type=</span><span class="s">&quot;struct bla&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;c&quot;</span> <span class="na">type=</span><span class="s">&quot;struct foo *&quot;</span><span class="nt">/&gt;</span>
  <span class="nt">&lt;/message&gt;</span>
  ...
 <span class="nt">&lt;/class&gt;</span>
@@ -217,7 +218,7 @@
 
 <span class="k">static</span> <span class="n">abi_event</span> <span class="n">ev</span><span class="p">;</span>
 
-<span class="kt">void</span> <span class="nf">data_cb</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">data_cb</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">,</span> <span class="k">struct</span> <span class="n">foo</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
  <span class="c1">// do something here</span>
 <span class="p">}</span>
 </pre></div>
@@ -244,7 +245,8 @@
 <p>Include header, then call the send function with the appropriate parameters</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="n">var</span> <span class="o">=</span> <span class="mf">2.</span><span class="p">;</span>
 <span class="k">struct</span> <span class="n">bla</span> <span class="n">s</span><span class="p">;</span>
-<span class="n">AbiSendMsgDATA</span><span class="p">(</span><span class="n">SENDER_ID</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+<span class="k">struct</span> <span class="n">foo</span> <span class="n">f</span><span class="p">;</span>
+<span class="n">AbiSendMsgDATA</span><span class="p">(</span><span class="n">SENDER_ID</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">f</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">SENDER_ID</span></code> by your sender ID defined in <code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi_sender_ids.h</span></code>.</p>
@@ -316,7 +318,7 @@
 <span class="n">ABI_EXTERN</span> <span class="n">abi_event</span><span class="o">*</span> <span class="n">abi_queues</span><span class="p">[</span><span class="n">ABI_MESSAGE_NB</span><span class="p">];</span> <span class="c1">// Magic trick to avoid generating .c file</span>
 
 <span class="c1">// Callbacks</span>
-<span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">abi_callbackDATA</span><span class="p">)(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">);</span> <span class="c1">// Specific callback for DATA message (arguments are const to prevent modifying them)</span>
+<span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">abi_callbackDATA</span><span class="p">)(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">,</span> <span class="k">struct</span> <span class="n">foo</span> <span class="o">*</span> <span class="n">c</span><span class="p">);</span> <span class="c1">// Specific callback for DATA message (arguments are const to prevent modifying them)</span>
 
 <span class="c1">// Bind and Send for each messages</span>
 <span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">AbiBindMsgDATA</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">abi_event</span> <span class="o">*</span> <span class="n">ev</span><span class="p">,</span> <span class="n">abi_callbackDATA</span> <span class="n">cb</span><span class="p">)</span> <span class="p">{</span>
@@ -326,7 +328,7 @@
   <span class="n">ABI_PREPEND</span><span class="p">(</span><span class="n">abi_queues</span><span class="p">[</span><span class="n">ABI_BARO_ABS_ID</span><span class="p">],</span><span class="n">ev</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">AbiSendMsgDATA</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">AbiSendMsgDATA</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">,</span> <span class="k">struct</span> <span class="n">foo</span> <span class="o">*</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
  <span class="c1">// Call all callback functions</span>
  <span class="n">abi_event</span><span class="o">*</span> <span class="n">e</span><span class="p">;</span>
  <span class="n">ABI_FOREACH</span><span class="p">(</span><span class="n">abi_queues</span><span class="p">[</span><span class="n">ABI_DATA_ID</span><span class="p">],</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
