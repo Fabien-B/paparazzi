@@ -100,6 +100,11 @@
 <li class="toctree-l3"><a class="reference internal" href="#airborne-code-for-subscriber">Airborne code for subscriber</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#airborne-code-for-publisher">Airborne code for publisher</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#code-generation">Code generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#in-depth">In depth</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generated-code">Generated code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-abi-in-custom-code">Using ABI in custom code</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -187,10 +192,14 @@
 <li><p>The components don’t need to know each other, they only need the message format.</p></li>
 <li><p>Each subscriber set a callback function that will be called when new data are sent.</p></li>
 </ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This middleware is <strong>NOT</strong> thread safe. Threads are not widely used in Paparazzi but remember this if you use them.</p>
+</div>
 </div>
 <div class="section" id="message-definition">
 <h2>Message definition<a class="headerlink" href="#message-definition" title="Permalink to this headline">¶</a></h2>
-<p>The messages are described in <code class="docutils literal notranslate"><span class="pre">conf/abi.xml</span></code> analoguous to other messages in paparazzi. Name are unique, IDs starts from 0. “type” field should be a real C type. Field name might be useless.</p>
+<p>The messages are described in <code class="docutils literal notranslate"><span class="pre">conf/abi.xml</span></code> analoguous to other messages in paparazzi. Name are unique, IDs starts from 0. “type” field should be a real C type.</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;class</span> <span class="na">name=</span><span class="s">&quot;airborne&quot;</span><span class="nt">&gt;</span>
  <span class="nt">&lt;message</span> <span class="na">name=</span><span class="s">&quot;DATA&quot;</span> <span class="na">id=</span><span class="s">&quot;0&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;field</span> <span class="na">name=</span><span class="s">&quot;a&quot;</span> <span class="na">type=</span><span class="s">&quot;float&quot;</span><span class="nt">/&gt;</span>
@@ -203,10 +212,10 @@
 </div>
 <div class="section" id="airborne-code-for-subscriber">
 <h2>Airborne code for subscriber<a class="headerlink" href="#airborne-code-for-subscriber" title="Permalink to this headline">¶</a></h2>
-<p>Include header and declare an <code class="docutils literal notranslate"><span class="pre">abi_event</span></code> as a global variable. Write the callback function with the proper prototype, matching the message.</p>
+<p>Include header and declare an <code class="docutils literal notranslate"><span class="pre">abi_event</span></code> as a global <code class="docutils literal notranslate"><span class="pre">static</span></code> variable (but <strong>not</strong> <code class="docutils literal notranslate"><span class="pre">const</span></code>). Write the callback function with the proper prototype, matching the message.</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;subsystems/abi.h&quot;</span><span class="cp"></span>
 
-<span class="n">abi_event</span> <span class="n">ev</span><span class="p">;</span>
+<span class="k">static</span> <span class="n">abi_event</span> <span class="n">ev</span><span class="p">;</span>
 
 <span class="kt">void</span> <span class="nf">data_cb</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="k">const</span> <span class="kt">float</span> <span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="k">struct</span> <span class="n">bla</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
  <span class="c1">// do something here</span>
@@ -225,13 +234,17 @@
 </ul>
 <p>The second parameter is a pointer to the global <code class="docutils literal notranslate"><span class="pre">abi_event</span></code> you declared. This variable <strong>can’t</strong> be reused for another bind. You must declare one abi_event per bind.</p>
 <p>The last parameter is your callback.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When creating your module with the Module Creator (in the Paparazzi Center : Tools -&gt; Module Creator), you can add subcriptions to ABI messages.</p>
+</div>
 </div>
 <div class="section" id="airborne-code-for-publisher">
 <h2>Airborne code for publisher<a class="headerlink" href="#airborne-code-for-publisher" title="Permalink to this headline">¶</a></h2>
 <p>Include header, then call the send function with the appropriate parameters</p>
 <div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">float</span> <span class="n">var</span> <span class="o">=</span> <span class="mf">2.</span><span class="p">;</span>
 <span class="k">struct</span> <span class="n">bla</span> <span class="n">s</span><span class="p">;</span>
-<span class="n">AbiSendMsgDATA</span><span class="p">(</span><span class="n">SENDER_ID</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">var</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">s</span><span class="p">);</span>
+<span class="n">AbiSendMsgDATA</span><span class="p">(</span><span class="n">SENDER_ID</span><span class="p">,</span> <span class="n">var</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
 </pre></div>
 </div>
 <p>Replace <code class="docutils literal notranslate"><span class="pre">SENDER_ID</span></code> by your sender ID defined in <code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi_sender_ids.h</span></code>.</p>
@@ -248,7 +261,92 @@
 </div>
 <div class="section" id="code-generation">
 <h2>Code generation<a class="headerlink" href="#code-generation" title="Permalink to this headline">¶</a></h2>
-<p>The generated code will be in <code class="docutils literal notranslate"><span class="pre">var/include/abi_messages.h</span></code> and include some structure definition from <code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi_common.h</span></code> (<code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi.h</span></code> is a convenience header that only includes <code class="docutils literal notranslate"><span class="pre">var/include/abi_messages.h</span></code>). Bind and Send functions are generated, as well as callback type definition. A linked list is used to store the binded callbacks for each message. The head of the list is in an array to allow a fast access.</p>
+<p>The generated code will be in <code class="docutils literal notranslate"><span class="pre">var/include/abi_messages.h</span></code> and include some structure definition from <code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi_common.h</span></code> (<code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi.h</span></code> is a convenience header that only includes <code class="docutils literal notranslate"><span class="pre">var/include/abi_messages.h</span></code>).</p>
+<p>Bind and Send functions are generated, as well as callback type definition. A linked list is used to store the binded callbacks for each message. The head of the list is in an array to allow a fast access.</p>
+<p>The code is generated by <code class="docutils literal notranslate"><span class="pre">/sw/tools/generators/gen_abi.xml</span></code>.</p>
+</div>
+<div class="section" id="in-depth">
+<h2>In depth<a class="headerlink" href="#in-depth" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="generated-code">
+<h3>Generated code<a class="headerlink" href="#generated-code" title="Permalink to this headline">¶</a></h3>
+<p>Here is the code of <code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi_common.h</span></code>:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Include here headers with structure definition you may want to use with ABI</span>
+<span class="cm"> * Ex: &#39;#include &quot;subsystems/gps.h&quot;&#39; in order to use the GpsState structure</span>
+<span class="cm"> */</span>
+<span class="cp">#include</span> <span class="cpf">&quot;subsystems/gps.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#include</span> <span class="cpf">&quot;subsystems/abi_sender_ids.h&quot;</span><span class="cp"></span>
+
+<span class="cp">#ifdef ABI_C</span>
+<span class="cp">#define ABI_EXTERN</span>
+<span class="cp">#else</span>
+<span class="cp">#define ABI_EXTERN extern</span>
+<span class="cp">#endif</span>
+
+<span class="cm">/** Generic callback definition */</span>
+<span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">abi_callback</span><span class="p">)(</span><span class="kt">void</span><span class="p">);</span>
+
+<span class="c1">// ABI Broadcast address.</span>
+<span class="cp">#define ABI_BROADCAST 255</span>
+
+<span class="c1">// ABI disable address</span>
+<span class="cp">#define ABI_DISABLE 0</span>
+
+<span class="cm">/** Event structure to store callbacks in a linked list */</span>
+<span class="k">struct</span> <span class="n">abi_struct</span> <span class="p">{</span>
+  <span class="kt">uint8_t</span> <span class="n">id</span><span class="p">;</span>
+  <span class="n">abi_callback</span> <span class="n">cb</span><span class="p">;</span>
+  <span class="k">struct</span> <span class="n">abi_struct</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">abi_struct</span> <span class="n">abi_event</span><span class="p">;</span>
+
+<span class="cm">/** Macros for linked list */</span>
+<span class="cp">#define ABI_FOREACH(head,el) for(el=head; el; el=el-&gt;next)</span>
+<span class="cp">#define ABI_PREPEND(head,add) { (add)-&gt;next = head; head = add; }</span>
+</pre></div>
+</div>
+<p>The generated code in <code class="docutils literal notranslate"><span class="pre">var/include/abi_messages.h</span></code> for the message defined above will look like this:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="c1">// Code generated in var/include/abi_messages.h</span>
+<span class="cp">#include</span> <span class="cpf">&quot;subsystems/abi_common.h</span><span class="cp"></span>
+<span class="c1">// Message IDs</span>
+<span class="cp">#define ABI_DATA_ID 0</span>
+
+<span class="c1">// Array and linked list</span>
+<span class="cp">#define ABI_MESSAGE_NB &lt;highest id of the messages in airborne class + 1&gt;</span>
+<span class="n">ABI_EXTERN</span> <span class="n">abi_event</span><span class="o">*</span> <span class="n">abi_queues</span><span class="p">[</span><span class="n">ABI_MESSAGE_NB</span><span class="p">];</span> <span class="c1">// Magic trick to avoid generating .c file</span>
+
+<span class="c1">// Callbacks</span>
+<span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">abi_callbackDATA</span><span class="p">)(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">);</span> <span class="c1">// Specific callback for DATA message (arguments are const to prevent modifying them)</span>
+
+<span class="c1">// Bind and Send for each messages</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">AbiBindMsgDATA</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="n">abi_event</span> <span class="o">*</span> <span class="n">ev</span><span class="p">,</span> <span class="n">abi_callbackDATA</span> <span class="n">cb</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">abi_queues</span><span class="p">[</span><span class="n">ABI_BARO_ABS_ID</span><span class="p">]</span> <span class="o">==</span> <span class="n">ev</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+  <span class="n">ev</span><span class="o">-&gt;</span><span class="n">id</span> <span class="o">=</span> <span class="n">sender_id</span><span class="p">;</span>
+  <span class="n">ev</span><span class="o">-&gt;</span><span class="n">cb</span> <span class="o">=</span> <span class="p">(</span><span class="n">abi_callback</span><span class="p">)</span><span class="n">cb</span><span class="p">;</span>
+  <span class="n">ABI_PREPEND</span><span class="p">(</span><span class="n">abi_queues</span><span class="p">[</span><span class="n">ABI_BARO_ABS_ID</span><span class="p">],</span><span class="n">ev</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">AbiSendMsgDATA</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">sender_id</span><span class="p">,</span> <span class="kt">float</span> <span class="n">a</span><span class="p">,</span> <span class="k">struct</span> <span class="n">bla</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+ <span class="c1">// Call all callback functions</span>
+ <span class="n">abi_event</span><span class="o">*</span> <span class="n">e</span><span class="p">;</span>
+ <span class="n">ABI_FOREACH</span><span class="p">(</span><span class="n">abi_queues</span><span class="p">[</span><span class="n">ABI_DATA_ID</span><span class="p">],</span><span class="n">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">id</span> <span class="o">==</span> <span class="n">ABI_BROADCAST</span> <span class="o">||</span> <span class="n">e</span><span class="o">-&gt;</span><span class="n">id</span> <span class="o">==</span> <span class="n">sender_id</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// call function only if selected source or broadcast address</span>
+   <span class="n">abi_callbackDATA</span> <span class="n">cb</span> <span class="o">=</span> <span class="p">(</span><span class="n">abi_callbackDATA</span><span class="p">)(</span><span class="n">e</span><span class="o">-&gt;</span><span class="n">cb</span><span class="p">);</span> <span class="c1">// C black magic</span>
+   <span class="n">cb</span><span class="p">(</span><span class="n">sender_id</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+  <span class="p">}</span>
+ <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-abi-in-custom-code">
+<h3>Using ABI in custom code<a class="headerlink" href="#using-abi-in-custom-code" title="Permalink to this headline">¶</a></h3>
+<p>If you want to use ABI outside of one of the Paparazzi firmwares (<code class="docutils literal notranslate"><span class="pre">rotorcraft</span></code>, <code class="docutils literal notranslate"><span class="pre">rover</span></code> or <code class="docutils literal notranslate"><span class="pre">fixedwing</span></code>), this code snippet should be written and called only once in a .c file (most probably your <code class="docutils literal notranslate"><span class="pre">main.c</span></code>) to enable ABI:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#define ABI_C 1</span>
+<span class="cp">#include</span> <span class="cpf">&quot;subsystems/abi.h&quot;</span><span class="cp"></span>
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
