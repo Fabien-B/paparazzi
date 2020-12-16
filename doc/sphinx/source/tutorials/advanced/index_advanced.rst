@@ -4,6 +4,7 @@
 Advanced
 ======================
 
-TBD
+.. toctree ::
+    develop_new_gps_driver
 
 
