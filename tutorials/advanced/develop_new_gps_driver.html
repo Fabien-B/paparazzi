@@ -1,0 +1,364 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Develop new GPS driver &mdash; PaparazziUAV _devel documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Interfacing with Paparazzi" href="../interfacing_with_paparazzi.html" />
+    <link rel="prev" title="Advanced" href="index_advanced.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home" alt="Documentation Home"> PaparazziUAV
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                5.13
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart/index_quick_start.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../user_guide/index_user_guide.html">User Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../installation/index_installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../developer_guide/index_developer.html">Developer Guide</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index_tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../beginner/index_beginner.html">Beginner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intermediate/index_intermediate.html">Intermediate</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index_advanced.html">Advanced</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Develop new GPS driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#edit-xml-file">Edit XML file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-h-file">Edit .h file</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#add-an-abi-id-for-your-module">Add an ABI ID for your module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#edit-c-file">Edit .c file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../interfacing_with_paparazzi.html">Interfacing with Paparazzi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../support/index_support.html">Support</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PaparazziUAV</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index_tutorials.html">Tutorials</a> &raquo;</li>
+        
+          <li><a href="index_advanced.html">Advanced</a> &raquo;</li>
+        
+      <li>Develop new GPS driver</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../../_sources/tutorials/advanced/develop_new_gps_driver.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="develop-new-gps-driver">
+<h1>Develop new GPS driver<a class="headerlink" href="#develop-new-gps-driver" title="Permalink to this headline">¶</a></h1>
+<p>We will see in this tutorial how to develop a driver for a new GNSS receiver.</p>
+<p>First, we create a new module. Use the Module Creator tool to ease this step. (In the Paparazzi Center: <em>Tools-&gt;Module Creator</em>)</p>
+<img alt="New A/C" class="align-center" src="../../_images/create_module_gps.png" />
+<div class="section" id="edit-xml-file">
+<h2>Edit XML file<a class="headerlink" href="#edit-xml-file" title="Permalink to this headline">¶</a></h2>
+<p>The generated module description file can be found in <code class="docutils literal notranslate"><span class="pre">conf/modules</span></code>. You have to edit it to fit your needs. Here the file for my module :</p>
+<div class="highlight-XML notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE module SYSTEM &quot;module.dtd&quot;&gt;</span>
+<span class="nt">&lt;module</span> <span class="na">name=</span><span class="s">&quot;gps_foo42&quot;</span> <span class="na">dir=</span><span class="s">&quot;gps&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;doc&gt;</span>
+    <span class="nt">&lt;description&gt;</span>Driver for the GNSS receiver Foo42, made by the Sirius Cybernetics Corporation.
+    <span class="nt">&lt;/description&gt;</span>
+  <span class="nt">&lt;/doc&gt;</span>
+  <span class="nt">&lt;autoload</span> <span class="na">name=</span><span class="s">&quot;gps&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;header&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;gps_foo42.h&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/header&gt;</span>
+  <span class="nt">&lt;init</span> <span class="na">fun=</span><span class="s">&quot;gps_foo42_init()&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;periodic</span> <span class="na">fun=</span><span class="s">&quot;gps_foo42_periodic_check()&quot;</span> <span class="na">freq=</span><span class="s">&quot;1.0&quot;</span> <span class="na">autorun=</span><span class="s">&quot;TRUE&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;makefile&gt;</span>
+    <span class="nt">&lt;file</span> <span class="na">name=</span><span class="s">&quot;gps_foo42.c&quot;</span><span class="nt">/&gt;</span>
+     <span class="nt">&lt;raw&gt;</span>
+      ifdef SECONDARY_GPS
+      ifneq (,$(findstring $(SECONDARY_GPS), foo42))
+      # this is the secondary GPS
+      $(TARGET).CFLAGS += -DGPS_SECONDARY_TYPE_H=\&quot;modules/gps/gps_foo42.h\&quot;
+      $(TARGET).CFLAGS += -DSECONDARY_GPS=GPS_FOO42
+      else
+      $(TARGET).CFLAGS += -DGPS_TYPE_H=\&quot;modules/gps/gps_foo42.h\&quot;
+      $(TARGET).CFLAGS += -DPRIMARY_GPS=GPS_FOO42
+      endif
+      else
+      # plain old single GPS usage
+      $(TARGET).CFLAGS += -DGPS_TYPE_H=\&quot;modules/gps/gps_foo42.h\&quot;
+      endif
+    <span class="nt">&lt;/raw&gt;</span>
+
+  <span class="nt">&lt;/makefile&gt;</span>
+  <span class="nt">&lt;makefile</span> <span class="na">target=</span><span class="s">&quot;fbw&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;define</span> <span class="na">name=</span><span class="s">&quot;USE_GPS&quot;</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/makefile&gt;</span>
+<span class="nt">&lt;/module&gt;</span>
+</pre></div>
+</div>
+<p>This module depend on the <code class="docutils literal notranslate"><span class="pre">gps</span></code> module. It is automaticaly loaded with <code class="docutils literal notranslate"><span class="pre">&lt;autoload</span> <span class="pre">name=&quot;gps&quot;/&gt;</span></code>. You may also want to autoload simulated GPS to simulation sessions. In this case add the following autoloads:</p>
+<div class="highlight-XML notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;autoload</span> <span class="na">name=</span><span class="s">&quot;gps_nps&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;autoload</span> <span class="na">name=</span><span class="s">&quot;gps_sim&quot;</span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">makefile</span></code> node can be constrained to specified targets. If you develop a driver for a real sensor, you probably don’t want it to be used in simulation. Add a <code class="docutils literal notranslate"><span class="pre">target</span></code> attribute to limit the use of your module to real autopilots only:</p>
+<div class="highlight-XML notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;makefile</span> <span class="na">target=</span><span class="s">&quot;ap|fbw&quot;</span><span class="nt">&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">ap</span></code> and <code class="docutils literal notranslate"><span class="pre">fbw</span></code> are the autopilot firmware names for real aircrafts.</p>
+</div>
+</div>
+<div class="section" id="edit-h-file">
+<h2>Edit .h file<a class="headerlink" href="#edit-h-file" title="Permalink to this headline">¶</a></h2>
+<p>Define <code class="docutils literal notranslate"><span class="pre">PRIMARY_GPS</span></code> like in the following code snippet in the <code class="docutils literal notranslate"><span class="pre">.h</span></code> file: this will automatically define your GPS as PRIMARY if no other is explicitely defined.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef PRIMARY_GPS</span>
+<span class="cp">#define PRIMARY_GPS GPS_FOO42</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+<p>If you specified an init function in the Module Creator, its prototype should appear here:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="kt">void</span> <span class="nf">gps_foo42_init</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>You need to declare a <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">GpsState</span></code> to hold GPS information. It can also be wrapped in a custom struct if needed. The _GpsState_ structure must be passed as argument to the <code class="docutils literal notranslate"><span class="pre">gps_periodic_check</span></code> function. The easy way to do it is to make a macro that wrap this call:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">extern</span> <span class="k">struct</span> <span class="n">GpsState</span> <span class="n">gps_foo</span><span class="p">;</span>
+<span class="cp">#define gps_foo42_periodic_check() gps_periodic_check(&amp;gps_foo)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you define this macro, you must then delete the function prototype and implementation that the Module Creator generated for you.</p>
+</div>
+</div>
+<div class="section" id="add-an-abi-id-for-your-module">
+<h2>Add an ABI ID for your module<a class="headerlink" href="#add-an-abi-id-for-your-module" title="Permalink to this headline">¶</a></h2>
+<p>In the file <code class="docutils literal notranslate"><span class="pre">sw/airborne/subsystems/abi_sender_ids.h</span></code>  add a free ID for your module in the GPS section (around after line 205) :</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef GPS_FOO42_ID</span>
+<span class="cp">#define GPS_FOO42_ID 16</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="edit-c-file">
+<h2>Edit .c file<a class="headerlink" href="#edit-c-file" title="Permalink to this headline">¶</a></h2>
+<p>Define the global <code class="docutils literal notranslate"><span class="pre">GpsState</span></code> structure you declared in the .h file:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">GpsState</span> <span class="n">gps_foo</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then initialise it in you init function. You should at least set the <code class="docutils literal notranslate"><span class="pre">fix</span></code> field (to false, assuming that you will not have a fix at the startup).</p>
+<p>Set or Clear the <code class="docutils literal notranslate"><span class="pre">valid_fields</span></code> bits:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">ClearBit</span><span class="p">(</span><span class="n">gps_foo</span><span class="p">.</span><span class="n">valid_fields</span><span class="p">,</span> <span class="n">GPS_VALID_POS_ECEF_BIT</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Valid fields are:</p>
+<ul class="simple">
+<li><p>GPS_VALID_POS_ECEF_BIT</p></li>
+<li><p>GPS_VALID_POS_LLA_BIT</p></li>
+<li><p>GPS_VALID_POS_UTM_BIT</p></li>
+<li><p>GPS_VALID_VEL_ECEF_BIT</p></li>
+<li><p>GPS_VALID_VEL_NED_BIT</p></li>
+<li><p>GPS_VALID_HMSL_BIT</p></li>
+<li><p>GPS_VALID_COURSE_BIT</p></li>
+</ul>
+</div>
+<p>Write your driver to get GPS information.</p>
+<p>Fill the <code class="docutils literal notranslate"><span class="pre">GpsState</span></code> structure to the best you can, and set the appropriate <code class="docutils literal notranslate"><span class="pre">valid_fields</span></code> bits.</p>
+<p>Finally, send the GPS ABI message:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="n">AbiSendMsgGPS</span><span class="p">(</span><span class="n">GPS_FOO42_ID</span><span class="p">,</span> <span class="n">now_ts</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">gps_foo</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">now_ts</span></code> is the current timestamp defined by <code class="docutils literal notranslate"><span class="pre">uint32_t</span> <span class="pre">now_ts</span> <span class="pre">=</span> <span class="pre">get_sys_time_usec();</span></code>.</p>
+</div>
+<p>To use your module, just add it to your airframe file in the <em>firmware</em> section: <code class="docutils literal notranslate"><span class="pre">&lt;module</span> <span class="pre">name=&quot;gps&quot;</span> <span class="pre">type=&quot;foo42&quot;/&gt;</span></code></p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../interfacing_with_paparazzi.html" class="btn btn-neutral float-right" title="Interfacing with Paparazzi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index_advanced.html" class="btn btn-neutral float-left" title="Advanced" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2018, Paparazzi UAV Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
