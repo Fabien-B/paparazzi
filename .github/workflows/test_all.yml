@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: test_all_conf
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push but only for the test_build branch
+  push:
+    branches:    
+      - '*test_all'
+  pull_request:
+    branches:    
+      - '*test_all'
+
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+
+      - name: Setup X server
+        run: |
+          Xvfb :0 -screen 0 1600x1200x24+32 &
+          touch ~/.Xauthority
+          xauth generate :0 . trusted 
+          xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
+      
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive      
+        
+      - name: Pull docker image
+        run: docker pull paparazziuav/pprz-ci
+
+      - name: run test
+        run: $GITHUB_WORKSPACE/docker/run.sh paparazziuav/pprz-ci make test_all_conf
+
