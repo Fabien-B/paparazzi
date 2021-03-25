@@ -17,14 +17,6 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     steps:
-
-      - name: Setup X server
-        run: |
-          Xvfb :0 -screen 0 1600x1200x24+32 &
-          touch ~/.Xauthority
-          xauth generate :0 . trusted 
-          xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
-      
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
         with:
@@ -34,5 +26,7 @@ jobs:
         run: docker pull paparazziuav/pprz-ci
 
       - name: run test
-        run: $GITHUB_WORKSPACE/docker/run.sh paparazziuav/pprz-ci make test_all_conf
+        run: |
+          export useX=false
+          $GITHUB_WORKSPACE/docker/run.sh paparazziuav/pprz-ci make test_all_conf
 
