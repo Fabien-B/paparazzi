@@ -28,5 +28,6 @@ jobs:
       - name: run test
         run: |
           export useX=false
+          export MAKEFLAGS=-j$(nproc)
           $GITHUB_WORKSPACE/docker/run.sh paparazziuav/pprz-ci make test_all_conf
 
