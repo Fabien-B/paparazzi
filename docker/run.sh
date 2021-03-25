@@ -40,15 +40,15 @@ SHARE_PAPARAZZI_HOME_OPTS="--volume=$PAPARAZZI_SRC:$PPRZ_HOME_CONTAINER \
 ############################################################
 # grant access to X-Server
 ############################################################
-if [ $UNAME == "Linux" ]; then
-    XSOCK=/tmp/.X11-unix
-    XAUTH=/tmp/.docker.xauth
-    touch $XAUTH
-    xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
-
-    # options to grant access to the Xserver
-    X_WINDOW_OPTS="--volume=$XSOCK:$XSOCK --volume=$XAUTH:$XAUTH --env=XAUTHORITY=${XAUTH} --env=DISPLAY=${DISPLAY}"
-fi
+#if [ $UNAME == "Linux" ]; then
+#    XSOCK=/tmp/.X11-unix
+#    XAUTH=/tmp/.docker.xauth
+#    touch $XAUTH
+#    xauth nlist $DISPLAY | sed -e 's/^..../ffff/' | xauth -f $XAUTH nmerge -
+#
+#    # options to grant access to the Xserver
+#    X_WINDOW_OPTS="--volume=$XSOCK:$XSOCK --volume=$XAUTH:$XAUTH --env=XAUTHORITY=${XAUTH} --env=DISPLAY=${DISPLAY}"
+#fi
 
 # using xauth with docker on OSX doesn't work, so we use socat:
 # see https://github.com/docker/docker/issues/8710

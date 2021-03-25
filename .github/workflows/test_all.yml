@@ -20,10 +20,11 @@ jobs:
 
       - name: Setup X server
         run: |
-          Xvfb :0 -screen 0 1600x1200x24+32 &
-          touch ~/.Xauthority
-          xauth generate :0 . trusted 
-          xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
+          echo "don't care about X"
+          #Xvfb :0 -screen 0 1600x1200x24+32 &
+          #touch ~/.Xauthority
+          #xauth generate :0 . trusted 
+          #xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
       
       - name: Checkout repository and submodules
         uses: actions/checkout@v2
