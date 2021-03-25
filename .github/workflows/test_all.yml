@@ -34,5 +34,5 @@ jobs:
         run: docker pull paparazziuav/pprz-ci
 
       - name: run test
-        run: $GITHUB_WORKSPACE/docker/run.sh paparazziuav/pprz-ci make test_all_conf
+        run: $GITHUB_WORKSPACE/docker/run.sh paparazziuav/pprz-ci make test_all_confs
 
