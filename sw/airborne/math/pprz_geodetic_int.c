@@ -87,7 +87,7 @@ void ltp_def_from_lla_i(struct LtpDef_i *def, struct LlaCoor_i *lla)
  * @param[in]  def  local coordinate system definition
  * @param[in]  ecef ECEF point in cm
  */
-void enu_of_ecef_point_i(struct EnuCoor_i *enu, struct LtpDef_i *def, struct EcefCoor_i *ecef)
+void enu_of_ecef_point_i(struct EnuCoorCm_i *enu, struct LtpDef_i *def, struct EcefCoor_i *ecef)
 {
 
   struct EcefCoor_i delta;
@@ -292,7 +292,7 @@ void ecef_of_ned_pos_i(struct EcefCoor_i *ecef, struct LtpDef_i *def, struct Ned
  * @param[in]  def  local coordinate system definition
  * @param[in]  lla  LLA point in 1e7deg and mm
  */
-void enu_of_lla_point_i(struct EnuCoor_i *enu, struct LtpDef_i *def, struct LlaCoor_i *lla)
+void enu_of_lla_point_i(struct EnuCoorCm_i *enu, struct LtpDef_i *def, struct LlaCoor_i *lla)
 {
   struct EcefCoor_i ecef;
   ecef_of_lla_i(&ecef, lla);

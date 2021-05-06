@@ -63,22 +63,41 @@ struct LlaCoor_i {
 };
 
 /**
- * @brief vector in North East Down coordinates
+ * @brief vector in North East Down coordinates in INT32_POS_FRAC units
  */
 struct NedCoor_i {
-  int32_t x;  ///< North
-  int32_t y;  ///< East
-  int32_t z;  ///< Down
+  int32_t x;  ///< North in INT32_POS_FRAC
+  int32_t y;  ///< East  in INT32_POS_FRAC
+  int32_t z;  ///< Down  in INT32_POS_FRAC
 };
 
 /**
- * @brief vector in East North Up coordinates
+ * @brief vector in North East Down coordinates in centimeters
+ */
+struct NedCoorCm_i {
+  int32_t x;  ///< North in cm
+  int32_t y;  ///< East  in cm
+  int32_t z;  ///< Down  in cm
+};
+
+/**
+ * @brief vector in East North Up coordinates in INT32_POS_FRAC units
  */
 struct EnuCoor_i {
-  int32_t x;  ///< East
-  int32_t y;  ///< North
-  int32_t z;  ///< Up
+  int32_t x;  ///< East  in INT32_POS_FRAC
+  int32_t y;  ///< North in INT32_POS_FRAC
+  int32_t z;  ///< Up    in INT32_POS_FRAC
 };
+
+/**
+ * @brief vector in East North Up coordinates in centimeters
+ */
+struct EnuCoorCm_i {
+  int32_t x;  ///< East  in cm
+  int32_t y;  ///< North in cm
+  int32_t z;  ///< Up    in cm
+};
+
 
 /**
  * @brief position in UTM coordinates
@@ -109,13 +128,13 @@ extern void ltp_def_from_ecef_i(struct LtpDef_i *def, struct EcefCoor_i *ecef);
 extern void ltp_def_from_lla_i(struct LtpDef_i *def, struct LlaCoor_i *lla);
 extern void lla_of_ecef_i(struct LlaCoor_i *out, struct EcefCoor_i *in);
 extern void ecef_of_lla_i(struct EcefCoor_i *out, struct LlaCoor_i *in);
-extern void enu_of_ecef_point_i(struct EnuCoor_i *enu, struct LtpDef_i *def, struct EcefCoor_i *ecef);
+extern void enu_of_ecef_point_i(struct EnuCoorCm_i *enu, struct LtpDef_i *def, struct EcefCoor_i *ecef);
 extern void ned_of_ecef_point_i(struct NedCoor_i *ned, struct LtpDef_i *def, struct EcefCoor_i *ecef);
 extern void enu_of_ecef_pos_i(struct EnuCoor_i *enu, struct LtpDef_i *def, struct EcefCoor_i *ecef);
 extern void ned_of_ecef_pos_i(struct NedCoor_i *ned, struct LtpDef_i *def, struct EcefCoor_i *ecef);
 extern void enu_of_ecef_vect_i(struct EnuCoor_i *enu, struct LtpDef_i *def, struct EcefCoor_i *ecef);
 extern void ned_of_ecef_vect_i(struct NedCoor_i *ned, struct LtpDef_i *def, struct EcefCoor_i *ecef);
-extern void enu_of_lla_point_i(struct EnuCoor_i *enu, struct LtpDef_i *def, struct LlaCoor_i *lla);
+extern void enu_of_lla_point_i(struct EnuCoorCm_i *enu, struct LtpDef_i *def, struct LlaCoor_i *lla);
 extern void ned_of_lla_point_i(struct NedCoor_i *ned, struct LtpDef_i *def, struct LlaCoor_i *lla);
 extern void enu_of_lla_pos_i(struct EnuCoor_i *enu, struct LtpDef_i *def, struct LlaCoor_i *lla);
 extern void ned_of_lla_pos_i(struct NedCoor_i *ned, struct LtpDef_i *def, struct LlaCoor_i *lla);
